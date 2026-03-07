@@ -1,13 +1,23 @@
 Rails.application.routes.draw do
-  root "homes#top"
-  get "homes/top"
+  get "posts/index"
+  get "posts/show"
+  get "posts/new"
+  get "posts/edit"
+  root "communities#index"
   get "about" => "homes#about"
 
   # =========================================================
   # ユーザー
   # =========================================================
+  # 新規登録（サインアップ）
+  # ログイン
   devise_for :users
+
   resources :communities
+  resources :users, only: [:show, :edit, :update, :destroy]
+
+  #投稿
+  resources :posts
 
     # customers（マイページ・編集・退会）
 

@@ -8,3 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* ヘッダー全体（ユーザー） */
+.header-users {
+  display: flex;
+}

@@ -2,7 +2,6 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <div class="container">
-
       <!-- サイト名 -->
       <%= link_to "RunGoals", root_path, class: "navbar-brand" %>
 
@@ -25,7 +24,7 @@
 
           <li class="nav-item">
             <%= link_to "ログアウト", destroy_user_session_path,
-            method: :delete, class: "nav-link" %>
+            data: { turbo_method: :delete }, class: "nav-link" %>
           </li>
 
         <% else %>
@@ -35,8 +34,7 @@
           </li>
 
           <li class="nav-item">
-            <%= link_to "新規登録", new_user_registration_path,
-            class: "nav-link" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
           </li>
 
           <li class="nav-item">

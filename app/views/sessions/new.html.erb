@@ -1,0 +1,19 @@
+<h1>ログイン</h1>
+
+<%= form_with url: users_sign_in_path, local: true do |f| %>
+
+  <div>
+    <%= f.label :email, "メールアドレス" %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード" %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= link_to 'ログイン', communities_path(@user) %>
+  </div>
+
+<% end %>

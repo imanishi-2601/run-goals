@@ -1,9 +1,7 @@
 class CommunitiesController < ApplicationController
-  #before_action :set_book, only: [:show, :edit, :update, :destroy]
-  #before_action :require_owner!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    #@user     =Current.session.user
+    @communities = Community.all
   end
-
 end
