@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "posts/index"
   get "posts/show"
-  get "posts/new"
+  post "posts/new" => "posts#create"  # データを追加（保存）するため
   get "posts/edit"
   root "communities#index"
   get "about" => "homes#about"

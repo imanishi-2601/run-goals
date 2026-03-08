@@ -11,6 +11,10 @@
         <% if user_signed_in? %>
 
           <li class="nav-item">
+            <%= link_to "新規投稿", posts_new_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
             <%= link_to "投稿一覧", posts_path, class: "nav-link" %>
           </li>
 

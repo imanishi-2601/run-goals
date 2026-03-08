@@ -1,2 +1,30 @@
 <h1>新規投稿</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<% if @post.errors.any? %>
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @post do |f| %>
+  <!-- 項目 -->
+  <!-- データ,カラム名 -->
+
+  <div class="form-header">
+    <div>日付</div>
+    <div>距離[km]</div>
+    <div>時間</div>
+    <div>メモ/感想</div>
+  </div>
+
+  <div class="form-input">
+    <div><%= f.text_field :date %></div>
+    <div><%= f.text_field :distance %></div>
+    <div><%= f.text_field :time %></div>
+    <div><%= f.text_field :memo %></div>
+  </div>
+
+  <%= f.submit '投稿' %>
+
+<% end %>

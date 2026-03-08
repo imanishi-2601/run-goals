@@ -17,11 +17,17 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_07_101749) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
     t.integer "user_id", null: false
+    t.integer "community_id"
+    t.date "date"
+    t.decimal "distance"
+    t.integer "time"
+    t.integer "rpe"
+    t.text "memo"
+    t.boolean "is_public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_posts_on_community_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -37,5 +43,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_07_101749) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "posts", "communities"
   add_foreign_key "posts", "users"
 end

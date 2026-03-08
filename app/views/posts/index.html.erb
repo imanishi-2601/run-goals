@@ -1,2 +1,42 @@
 <h1>投稿一覧</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+
+        <div>
+          <table class="users-table">
+            <thead>
+            <tr>
+              <th>日付</th>
+              # <th>名前</th>
+              <th>距離[km]</th>
+              <th>時間</th>
+              <th>ペース[分・秒/km]</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% if @posts.any? %>
+              <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.date %></td>
+                <td><%= post.distance %> km</td>
+                <td><%= post.time %> 秒</td>
+                <td>
+                  <% if post.distance.present? && post.distance.to_f > 0 && post.time.present? %>
+                    <%= (post.time / post.distance).round(1) %> 秒/km
+                 <% end %>
+                </td>
+                <td>
+                  <%= link_to "詳細", post_path(post) %>
+                </td>
+              </tr>
+              <% end %>
+
+              <% else %>
+                <tr>
+                  <td colspan="6">投稿がまだありません</td>
+                </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+        </div>

@@ -13,3 +13,23 @@
 .header-users {
   display: flex;
 }
+
+/* 投稿（ユーザー） */
+.form-row{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/**/
+.form-header,
+.form-input{
+  display: flex;
+  gap: 20px;
+}
+
+/**/
+.form-header div,
+.form-input div{
+  width: 150px;
+}
