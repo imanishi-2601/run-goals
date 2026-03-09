@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -12,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts(post_params)
     @post.user_id = current_user.id
 
     if @post.save
@@ -26,11 +27,18 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to posts_path, notice: "投稿を削除しました"
+  end
+
     private
 
   def post_params
     params.require(:post).permit(
       :date,
+      :name,
       :distance,
       :time,
       :memo,

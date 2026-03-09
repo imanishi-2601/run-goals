@@ -1,0 +1,19 @@
+<h1>登録情報編集</h1>
+
+
+<%= form_with model: @user, local: true do |f| %>
+  <div>
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email %>
+  <div>
+
+  <%= f.submit "更新する", class: "btn btn-primary px-4" %>
+  <%= link_to "戻る", user_path(@user), class: "btn btn-primary px-4" %>
+
+<% end %>
+

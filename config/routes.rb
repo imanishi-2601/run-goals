@@ -16,10 +16,13 @@ Rails.application.routes.draw do
   resources :communities
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  # マイページ
+  # get "users/show" => "users#"
+
   #投稿
   resources :posts
 
-    # customers（マイページ・編集・退会）
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -14,6 +14,18 @@
   display: flex;
 }
 
+/* マイページ（ユーザー） */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.user-table th,
+.user-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+
 /* 投稿（ユーザー） */
 .form-row{
   display: flex;
@@ -33,3 +45,4 @@
 .form-input div{
   width: 150px;
 }
+

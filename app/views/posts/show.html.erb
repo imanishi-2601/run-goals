@@ -1,21 +1,35 @@
 <h1>投稿詳細</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
 
         <div>
           <table class="users-table">
-            <tbody>
+            <thead>
               <th>日付</th>
               <th>名前</th>
               <th>距離[km]</th>
               <th>時間</th>
               <th>ペース[分・秒/km]</th>
-              <th>メモ・本文</th>
+              <th>メモ・感想</th>
               <th>コメント</th>
-              <th>投稿ボタン用</th>
+              <th></th>
+            </thead>
 
-
-
-
+            <tbody>
+              <tr>
+                <td><%= @post.date %></td>
+                <td></td>
+                <td><%= @post.distance %> km</td>
+                <td><%= @post.time %> 秒</td>
+                <td>
+                  <% if @post.distance.present? && @post.distance.to_f > 0 && @post.time.present? %>
+                    <%= (@post.time / @post.distance).round(1) %> 秒/km
+                 <% end %>
+                </td>
+                <td><%= @post.memo %></td>
+                <td></td>
+                <td>
+                  <%= button_to "削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
