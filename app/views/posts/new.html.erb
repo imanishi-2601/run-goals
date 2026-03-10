@@ -19,9 +19,15 @@
   </div>
 
   <div class="form-input">
-    <div><%= f.text_field :date %></div>
+    <div><%= f.date_field :date %></div>
     <div><%= f.text_field :distance %></div>
-    <div><%= f.text_field :time %></div>
+    <div>
+      <%= number_field_tag :hour, nil, placeholder: "時", min: 0 %>
+      :
+      <%= number_field_tag :min, nil, placeholder: "分", min: 0, max: 59 %>
+      :
+      <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59 %>
+    </div>
     <div><%= f.text_field :memo %></div>
   </div>
 

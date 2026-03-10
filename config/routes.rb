@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  root "homes#top"
+  get "community_memberships/index"
+  get "community_memberships/create"
+  get "community_memberships/update"
+  get "community_memberships/destroy"
   get "posts/index"
   get "posts/show"
   post "posts/new" => "posts#create"  # データを追加（保存）するため
   get "posts/edit"
-  root "communities#index"
-  get "about" => "homes#about"
+
 
   # =========================================================
   # ユーザー
@@ -13,14 +17,22 @@ Rails.application.routes.draw do
   # ログイン
   devise_for :users
 
+  # コミュニティ
   resources :communities
+  resources :communities do
+    resources :community_memberships, only: [:index, :create, :update, :destroy]
+  end
   resources :users, only: [:show, :edit, :update, :destroy]
 
   # マイページ
   # get "users/show" => "users#"
 
-  #投稿
+  # 投稿
   resources :posts
+  resources :communities do
+    resources :posts, only: [:index]
+  end
+
 
 
 

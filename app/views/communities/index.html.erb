@@ -1,1 +1,35 @@
 <h1>コミュニティ一覧</h1>
+
+<div>
+<div class="community-container">
+<%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
+
+          <table class="community-table">
+            <thead>
+            <tr>
+              <th>コミュニティ名</th>
+              <th>コミュニティ紹介</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% if @communities.any? %>
+                <% @communities.each do |community| %>
+                  <tr>
+                    <td><%= community.name %></td>
+                    <td><%= community.introduction %></td>
+                    <td>
+                      <%= link_to "詳細", community_path(community) %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td>コミュニティはありません</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+</div>

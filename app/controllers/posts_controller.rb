@@ -1,7 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @posts = Post.all
+    if params[:community_id]
+      @community = Community.find(params[:community_id])
+
+      @posts = Post.joins(:user)
+                  .joins("INNER JOIN community_memberships
+                        ON community_memberships.user_id = users.id")
+                  .where(community_memberships: { community_id: @community.id })
+
+    else
+      @posts = Post.all
+    end
   end
 
   def show
@@ -13,13 +23,19 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts(post_params)
-    @post.user_id = current_user.id
+    total_sec = Post.to_sec(
+      params[:hour].to_i,
+      params[:min].to_i,
+      params[:sec].to_i
+    )
+
+    @post = current_user.posts.new(post_params)
+    @post.time = total_sec
+
 
     if @post.save
       redirect_to posts_path
     else
-      Rails.logger.debug @post.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end

@@ -1,0 +1,23 @@
+<h1><%= @community.name %> _メンバー一覧</h1>
+
+<div class="community-container">
+          <table class="community-table">
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th>参加状態</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memberships.each do |membership| %>
+      <tr>
+        <td><%= membership.user.name %></td>
+        <td><%= membership.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "コミュニティ詳細へ戻る", community_path(@community) %>
+</div>

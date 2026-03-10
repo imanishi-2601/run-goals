@@ -1,0 +1,17 @@
+<h1>コミュニティ新規作成</h1>
+
+<%= form_with model: @community, local: true do |f| %>
+  <div>
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :introduction, "紹介文" %>
+    <%= f.text_field :introduction %>
+  </div>
+
+  <%= f.submit "作成する", class: "btn btn-primary px-4" %>
+  <%= link_to "戻る", communities_path, class: "btn btn-primary px-4" %>
+
+<% end %>
