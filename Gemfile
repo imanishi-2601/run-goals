@@ -62,3 +62,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# MySQL利用_環境変数の読み込み
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
