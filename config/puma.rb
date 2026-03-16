@@ -28,11 +28,8 @@ threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
 # 開発環境と本番環境で起動方法を分ける
-if ENV.fetch("RAILS_ENV", "development") == "production"
   bind "unix://#{Dir.getwd}/tmp/sockets/puma.sock"
-else
-  # port ENV.fetch("PORT", 3000)
-end
+  port ENV.fetch("PORT", 3000)
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
