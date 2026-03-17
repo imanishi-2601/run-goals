@@ -9,28 +9,38 @@
 
 <%= form_with model: @post do |f| %>
   <!-- 項目 -->
-  <!-- データ,カラム名 -->
+  <!-- データ -->
 
-  <div class="form-header">
-    <div>日付</div>
-    <div>距離[km]</div>
-    <div>時間</div>
-    <div>メモ/感想</div>
-  </div>
-
-  <div class="form-input">
-    <div><%= f.date_field :date %></div>
-    <div><%= f.text_field :distance %></div>
-    <div>
-      <%= number_field_tag :hour, nil, placeholder: "時", min: 0 %>
-      :
-      <%= number_field_tag :min, nil, placeholder: "分", min: 0, max: 59 %>
-      :
-      <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59 %>
+  <div class="form-row">
+    <div class="post-column">
+      <div class="post-label">日付</div>
+      <div class="post-input">
+        <%= f.date_field :date %>
+      </div>
     </div>
-    <div><%= f.text_field :memo %></div>
+    <div class="post-column">
+      <div class="post-label">距離[km]</div>
+      <div class="post-input">
+        <%= f.text_field :distance %>
+      </div>
+    </div>
+    <div class="post-column">
+      <div class="post-label">時間</div>
+      <div class="post-input">
+        <%= number_field_tag :hour, nil, placeholder: "時", min: 0, class: "time-input" %>
+        :
+        <%= number_field_tag :min, nil, placeholder: "分", min: 0, max: 59, class: "time-input" %>
+        :
+        <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59, class: "time-input" %>
+      </div>
+    </div>
+    <div class="post-column memo-column">
+      <div class="post-label">メモ/感想</div>
+      <div class="post-input">
+        <%= f.text_area :memo, rows: 2, class: "memo-textarea" %>
+      </div>
+    </div>
   </div>
 
   <%= f.submit '投稿' %>
-
 <% end %>

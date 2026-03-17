@@ -1,8 +1,15 @@
 <h1>コミュニティ一覧</h1>
 
-<div>
 <div class="community-container">
-<%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
+
+  <div class="container community-show">
+    <div class="row">
+        <div class="col-md-8 offset-md-1 user-right">
+          <%= render "shared/search_form" %>
+
+          <div class="community-actions">
+            <%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
+          </div>
 
           <table class="community-table">
             <thead>
@@ -32,4 +39,6 @@
             </tbody>
           </table>
         </div>
+    </div>
+  </div>
 </div>
