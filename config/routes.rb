@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :community_memberships, only: [:index, :create, :update, :destroy]
   end
   resources :users, only: [:show, :edit, :update, :destroy]
+  get "search", to: "search#index"
 
   # マイページ
   # get "users/show" => "users#"
