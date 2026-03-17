@@ -1,0 +1,23 @@
+<h1>検索結果</h1>
+
+<table class="community-table">
+  <thead>
+    <tr>
+      <th>コミュニティ名</th>
+      <th>コミュニティ紹介</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @communities.each do |communities| %>
+      <tr>
+        <td><%= community.name %></td>
+        <td><%= community.introduction %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @communities.any? %>
+  <p>該当する投稿はありません</p>
+<% end %>
