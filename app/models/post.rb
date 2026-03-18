@@ -1,6 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  validates :date, presence: true
+  validates :distance, presence: true
+  validates :time, presence: true
+
   def self.to_sec(hour, min, sec)
     hour_to_sec = hour * 60 * 60
     min_to_sec = min * 60

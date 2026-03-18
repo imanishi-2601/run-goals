@@ -1,5 +1,11 @@
 <h1>登録情報編集</h1>
-
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: @user, local: true do |f| %>
   <div>
@@ -17,3 +23,8 @@
 
 <% end %>
 
+<hr>
+
+<!-- 退会ボタン -->
+<%= link_to "退会", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" },
+    class: "btn btn-danger px-4" %>

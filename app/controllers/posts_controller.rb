@@ -34,13 +34,31 @@ class PostsController < ApplicationController
 
 
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(@post), notice: "投稿を作成しました"
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def update
+    total_sec = Post.to_sec(
+      params[:hour].to_i,
+      params[:min].to_i,
+      params[:sec].to_i
+    )
+
+    @post = current_user.posts.find(params[:id])
+    @post.time = total_sec
+
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

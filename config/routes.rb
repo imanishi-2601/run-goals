@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   # ログイン
   devise_for :users
 
+  resources :users
+
   # コミュニティ
   resources :communities
   resources :communities do
