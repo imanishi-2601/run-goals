@@ -12,12 +12,13 @@
               <th>メモ・感想</th>
               <th>コメント</th>
               <th></th>
+              <th></th>
             </thead>
 
             <tbody>
               <tr>
                 <td><%= @post.date %></td>
-                <td><%= @post.user.name %></td>
+                <td><%= link_to @post.user.name, user_path(@post.user) %></td>
                 <td><%= @post.distance %></td>
                 <td><%= @post.time %></td>
                 <td>
@@ -27,6 +28,7 @@
                 </td>
                 <td><%= @post.memo %></td>
                 <td></td>
+                <td><%= link_to "編集", edit_post_path(@post) %></td>
                 <td>
                   <%= link_to "削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
                 </td>

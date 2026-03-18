@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   # ログイン
   devise_for :users
 
+  resources :users
+
   # コミュニティ
   resources :communities do
     collection do
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show, :edit, :update, :destroy]
+  get "search", to: "search#index"
 
   # マイページ
   # get "users/show" => "users#"
