@@ -20,10 +20,15 @@ Rails.application.routes.draw do
   resources :users
 
   # コミュニティ
-  resources :communities
   resources :communities do
+    collection do
+      get :search
+    end
+
     resources :community_memberships, only: [:index, :create, :update, :destroy]
+    resources :posts, only: [:index]
   end
+
   resources :users, only: [:show, :edit, :update, :destroy]
   get "search", to: "search#index"
 
@@ -32,11 +37,6 @@ Rails.application.routes.draw do
 
   # 投稿
   resources :posts
-  resources :communities do
-    resources :posts, only: [:index]
-  end
-
-
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

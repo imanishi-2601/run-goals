@@ -1,0 +1,16 @@
+<%= form_with url: search_communities_path, method: :get, local: true do |f| %>
+  <%= f.text_field :keyword, placeholder: "キーワード検索" %>
+
+  <%= f.select :match,
+    options_for_select(
+      [["部分一致", "partial"], ["完全一致", "exact"], ["前方一致", "prefix"], ["後方一致", "suffix"]],
+      params[:match] || "partial"
+    )
+  %>
+
+  <%= f.submit "検索" %>
+
+  <% if params[:q].present? %>
+    <%= link_to "クリア", search_path %>
+  <% end %>
+<% end %>
