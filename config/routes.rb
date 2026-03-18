@@ -18,23 +18,22 @@ Rails.application.routes.draw do
   devise_for :users
 
   # コミュニティ
-  resources :communities
   resources :communities do
+    collection do
+      get :search
+    end
+
     resources :community_memberships, only: [:index, :create, :update, :destroy]
+    resources :posts, only: [:index]
   end
+
   resources :users, only: [:show, :edit, :update, :destroy]
-  get "search", to: "search#index"
 
   # マイページ
   # get "users/show" => "users#"
 
   # 投稿
   resources :posts
-  resources :communities do
-    resources :posts, only: [:index]
-  end
-
-
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

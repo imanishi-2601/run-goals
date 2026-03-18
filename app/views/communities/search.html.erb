@@ -1,5 +1,7 @@
 <h1>検索結果</h1>
 
+<% if @communities.any? %>
+
 <table class="community-table">
   <thead>
     <tr>
@@ -9,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @communities.each do |communities| %>
+    <% @communities.each do |community| %>
       <tr>
         <td><%= community.name %></td>
         <td><%= community.introduction %></td>
@@ -18,6 +20,6 @@
   </tbody>
 </table>
 
-<% if @communities.any? %>
-  <p>該当する投稿はありません</p>
+<% else %>
+  <p>該当するコミュニティはありません</p>
 <% end %>

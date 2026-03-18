@@ -36,6 +36,18 @@ class CommunitiesController < ApplicationController
 
   end
 
+  def search
+    if params[:keyword].present?
+      @communities = Community.where(
+        "name LIKE ? OR introduction LIKE ?",
+        "%#{params[:keyword]}%",
+        "%#{params[:keyword]}%"
+      )
+    else
+      @communities = Community.none
+   end
+  end
+
 private
 
   def community_params
