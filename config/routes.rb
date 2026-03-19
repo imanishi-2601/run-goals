@@ -38,6 +38,13 @@ Rails.application.routes.draw do
   # 投稿
   resources :posts
 
+  # =========================================================
+  # 管理者
+  # =========================================================
+  namespace :admins do
+    resources :communities
+    resources :communities, only: [:index, :show, :update, :destroy]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
