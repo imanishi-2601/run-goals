@@ -6,39 +6,8 @@
     <div class="row">
         <div class="col-md-8 offset-md-1 user-right">
           <%= render "shared/search_form" %>
-
-          <div class="community-actions">
-            <%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
-          </div>
-
-          <table class="community-table">
-            <thead>
-            <tr>
-              <th>コミュニティ名</th>
-              <th>コミュニティ紹介</th>
-              <th></th>
-            </tr>
-            </thead>
-
-            <tbody>
-              <% if @communities.any? %>
-                <% @communities.each do |community| %>
-                  <tr>
-                    <td><%= community.name %></td>
-                    <td><%= community.introduction %></td>
-                    <td>
-                      <%= link_to "詳細", community_path(community) %>
-                    </td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr>
-                  <td>コミュニティはありません</td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+          <%= render "shared/communities", communities: @communities,
+              detail_path: ->(community) { admins_community_path(community) } %>
     </div>
   </div>
 </div>

@@ -1,0 +1,30 @@
+<h1>コミュニティ詳細</h1>
+<p>管理者画面</p>
+
+        <div>
+        <div class="community-container">
+          <table class="community-table">
+            <thead>
+            <tr>
+              <th>コミュニティ名</th>
+              <th>コミュニティ紹介</th>
+              <th>メンバー一覧</th>
+              <th>投稿一覧</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+                  <tr>
+                    <td><%= @community.name %></td>
+                    <td><%= @community.introduction %></td>
+                    <td><%= link_to "メンバー", community_community_memberships_path(@community) %></td>
+                    <td><%= link_to "投稿", community_posts_path(@community) %></td>
+                    <td><%= link_to "削除", admins_community_path(@community), method: :delete, data: { confirm: "本当に削除？" } %></td>
+                  </tr>
+            </tbody>
+
+          </table>
+          <%= link_to "一覧に戻る", admins_communities_path %>
+        <div>
+        <div>
