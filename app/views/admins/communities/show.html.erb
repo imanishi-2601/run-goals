@@ -18,8 +18,8 @@
                   <tr>
                     <td><%= @community.name %></td>
                     <td><%= @community.introduction %></td>
-                    <td><%= link_to "メンバー", community_community_memberships_path(@community) %></td>
-                    <td><%= link_to "投稿", community_posts_path(@community) %></td>
+                    <td><%= link_to "メンバー", admins_community_community_memberships_path(@community) %></td>
+                    <td><%= link_to "投稿", admins_community_posts_path(@community) %></td>
                     <td><%= link_to "削除", admins_community_path(@community), method: :delete, data: { confirm: "本当に削除？" } %></td>
                   </tr>
             </tbody>

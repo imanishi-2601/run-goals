@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
 
     resources :community_memberships, only: [:index, :create, :update, :destroy]
-    resources :posts, only: [:index]
+    resources :posts
   end
 
   resources :users, only: [:show, :edit, :update, :destroy]
@@ -35,16 +35,25 @@ Rails.application.routes.draw do
   # マイページ
   # get "users/show" => "users#"
 
-  # 投稿
-  resources :posts
+  # 全投稿一覧用
+  resources :posts, only: [:index, :show, :new, :create]
+  # コミュニティ別投稿一覧用
+  resources :communities do
+    resources :posts, only: [:index]
+  end
 
   # =========================================================
   # 管理者
   # =========================================================
   namespace :admins do
+    get "posts/index"
+    resources :communities do
+      resources :community_memberships, only: [:index]
+      resources :posts, only: [:index]
+    end
     resources :communities
     resources :communities, only: [:index, :show, :update, :destroy]
-
+    resources :posts, only: [:index]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

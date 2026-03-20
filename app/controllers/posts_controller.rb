@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   def index
-    if params[:community_id]
+    if params[:community_id].present?
       @community = Community.find(params[:community_id])
 
       @posts = Post.joins(:user)
@@ -76,7 +76,8 @@ class PostsController < ApplicationController
       :distance,
       :time,
       :memo,
-      :is_public
+      :is_public,
+      :community_id
     )
   end
 end
