@@ -1,0 +1,27 @@
+          <table class="community-table">
+            <thead>
+            <tr>
+              <th>コミュニティ名</th>
+              <th>コミュニティ紹介</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% if communities.any? %>
+                <% communities.each do |community| %>
+                  <tr>
+                    <td><%= community.name %></td>
+                    <td><%= community.introduction %></td>
+                    <td>
+                      <%= link_to "詳細", detail_path.call(community) %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td>コミュニティはありません</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>

@@ -1,0 +1,13 @@
+<h1>コミュニティ一覧</h1>
+<p>管理者画面</p>
+<div class="community-container">
+
+  <div class="container community-show">
+    <div class="row">
+        <div class="col-md-8 offset-md-1 user-right">
+          <%= render "shared/search_form" %>
+          <%= render "shared/communities", communities: @communities,
+              detail_path: ->(community) { admins_community_path(community) } %>
+    </div>
+  </div>
+</div>
