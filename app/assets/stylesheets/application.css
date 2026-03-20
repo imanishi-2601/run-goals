@@ -14,6 +14,24 @@
   display: flex;
 }
 
+/* 新規会員登録（ユーザー） */
+.signup-wrapper {
+  width: 400px;
+  margin: 80px auto;
+}
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.field label {
+  width: 150px;
+}
+.field input {
+  flex: 1;
+  height: 40px;
+}
+
 /* マイページ（ユーザー） */
 .users-table {
   width: 100%;
