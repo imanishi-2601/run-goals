@@ -1,4 +1,4 @@
-class Admins::CommunitiesController < ApplicationController
+class Admins::CommunitiesController < Admins::BaseController
   # before_action :authenticate_admins!
   def top
 

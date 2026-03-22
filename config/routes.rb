@@ -46,7 +46,8 @@ Rails.application.routes.draw do
   # 管理者
   # =========================================================
   namespace :admins do
-    get "posts/index"
+    root "homes#top"
+
     resources :communities do
       resources :community_memberships, only: [:index]
       resources :posts, only: [:index]
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
     resources :communities
     resources :communities, only: [:index, :show, :update, :destroy]
     resources :posts, only: [:index]
+    resources :users, only: [:index]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
