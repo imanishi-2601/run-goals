@@ -1,0 +1,35 @@
+<h1>ユーザー管理</h1>
+
+        <div>
+
+          <table class="admins-user-table">
+            <thead>
+            <tr>
+              <th>ユーザーid</th>
+              <th>ユーザー名</th>
+              <th>メールアドレス</th>
+              <th>ステータス</th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% if @users.any? %>
+              <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.status_label %></td>
+              </tr>
+              <% end %>
+
+              <% else %>
+                <tr>
+                  <td colspan="6">ユーザーがまだいません</td>
+                </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+
+        </div>

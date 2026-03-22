@@ -187,3 +187,9 @@
 body {
   background-image: image-url("running_top.webp");
 }
+
+/*管理者*/
+.admins-user-table {
+  width: 100%;
+  border-collapse: collapse;
+}

@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :joined_communities, through: :community_membership, source: :community
 
   has_many :posts
+
+  def status_label
+    is_active ? "有効" : "退会済み"
+  end
 end
