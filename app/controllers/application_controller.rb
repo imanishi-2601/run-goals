@@ -6,20 +6,20 @@ class ApplicationController < ActionController::Base
   # サインイン後のリダイレクト先
   # ユーザーが作成したコミュニティの保留中の参加申請がある場合はマイページへ、ない場合はコミュニティ一覧へ
   def after_sign_in_path_for(resource)
-    pending_memberships = CommunityMembership
-      .joins(:community)
-      .where(communities: { user_id: resource.id })
-      .where(status: :pending)
-
-    if pending_memberships.exists?
-      user_path(resource)
+    if resource.admin?
+      admins_root_path
     else
-      communities_path
-    end
-  end
+      pending_memberships = CommunityMembership
+        .joins(:community)
+        .where(communities: { user_id: resource.id })
+        .where(status: :pending)
 
-  def after_sign_up_path_for(resource)
-    communities_path
+      if pending_memberships.exists?
+        user_path(resource)
+      else
+        communities_path
+      end
+    end
   end
 
   def configure_permitted_parameters

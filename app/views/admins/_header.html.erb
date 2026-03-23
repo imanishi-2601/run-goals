@@ -3,12 +3,12 @@
 
     <div class="container">
       <!-- サイト名 -->
-      <%= link_to "RunGoals", root_path, class: "navbar-brand" %>
+      <%= link_to "RunGoals", admins_root_path, class: "navbar-brand" %>
 
       <!-- メニュー -->
       <ul class="navbar-nav ms-auto">
 
-        <% if user_signed_in? %>
+        <% if user_signed_in? && current_user.admin? %>
 
           <li class="nav-item">
             <%= link_to "コミュニティ管理", admins_communities_path, class: "nav-link" %>
@@ -39,10 +39,7 @@
           </li>
 
         <% end %>
-
       </ul>
-
     </div>
-
   </nav>
 </header>

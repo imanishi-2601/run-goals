@@ -1,7 +1,6 @@
 <h1>ユーザー管理</h1>
 
-        <div>
-
+<div class="col-md-10 offset-md-1">
           <table class="admins-user-table">
             <thead>
             <tr>
@@ -9,6 +8,8 @@
               <th>ユーザー名</th>
               <th>メールアドレス</th>
               <th>ステータス</th>
+              <th>権限</th>
+              <th>詳細</th>
             </tr>
             </thead>
 
@@ -20,6 +21,8 @@
                 <td><%= user.name %></td>
                 <td><%= user.email %></td>
                 <td><%= user.status_label %></td>
+                <td><%= user.admin? ? "管理者" : "一般" %></td>
+                <td>詳細</td>
               </tr>
               <% end %>
 
@@ -28,8 +31,6 @@
                   <td colspan="6">ユーザーがまだいません</td>
                 </tr>
               <% end %>
-
             </tbody>
           </table>
-
         </div>

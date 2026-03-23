@@ -46,7 +46,11 @@ Rails.application.routes.draw do
   # 管理者
   # =========================================================
   namespace :admins do
-    root "homes#top"
+    root "communities#index"
+
+    get "sign_in", to: "sessions#new"
+    post "sign_in", to: "sessions#create"
+    delete "sign_out", to: "sessions#destroy"
 
     resources :communities do
       resources :community_memberships, only: [:index, :create, :update, :destroy]
