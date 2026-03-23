@@ -13,7 +13,7 @@
     <% @memberships.each do |membership| %>
       <tr>
         <td><%= membership.user.name %></td>
-        <td><%= membership.status %></td>
+        <td><%= membership.approved? ? "参加中" : membership.status %></td>
       </tr>
     <% end %>
   </tbody>

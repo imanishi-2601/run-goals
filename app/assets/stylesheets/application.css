@@ -33,6 +33,19 @@
 }
 
 /* マイページ（ユーザー） */
+.mypage-container {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.mypage-left {
+  width: 35%;
+  min-width: 400px;
+}
+.mypage-right {
+  width: 55%;
+}
+
 .users-table {
   width: 100%;
   border-collapse: collapse;
@@ -41,6 +54,14 @@
 .user-table td {
   border: 1px solid #ccc;
   padding: 8px;
+}
+.user-table-right{
+  width: 100%;
+  border-collapse: collapse;
+}
+.action-buttons{
+  display: flex;
+  gap: 8px;
 }
 
 /* コミュニティ一覧（ユーザー） */

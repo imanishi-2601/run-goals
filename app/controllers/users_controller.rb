@@ -4,6 +4,12 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @posts = @user.posts.order(created_at: :desc)
+
+    # ユーザーが作成したコミュニティの保留中の参加申請を取得
+    @pending_memberships = CommunityMembership
+      .joins(:community)
+      .where(communities: { user_id: @user.id })
+      .where(status: :pending)
   end
 
   def edit

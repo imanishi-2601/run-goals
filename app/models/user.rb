@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :communities
 
+  # membership=>単数か複数か
   has_many :community_membership, dependent: :destroy
   has_many :joined_communities, through: :community_membership, source: :community
+
+  has_many :community_memberships, dependent: :destroy
+  has_many :joined_communities, through: :community_memberships, source: :community
 
   has_many :posts
 

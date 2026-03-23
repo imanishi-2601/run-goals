@@ -1,6 +1,5 @@
 <h1>コミュニティ詳細</h1>
 
-
         <div>
         <div class="community-container">
           <table class="community-table">
@@ -20,17 +19,42 @@
                     <td><%= @community.introduction %></td>
                     <td><%= link_to "メンバー", community_community_memberships_path(@community) %></td>
                     <td><%= link_to "投稿", community_posts_path(@community) %></td>
-                    <td><%= button_to "参加申請",
-                      community_community_memberships_path(@community),
-                      method: :post,
-                      data: { turbo_confirm: "このコミュニティに参加申請しますか？" },
-                      class: "btn btn-primary" %>
+                    <td><% if @community_membership.nil? %>
+                          <%= button_to "参加申請",
+                              community_community_memberships_path(@community),
+                              method: :post,
+                              data: { turbo_confirm: "このコミュニティに参加申請しますか？" },
+                              class: "btn btn-primary" %>
+
+                            <% elsif @community_membership.pending? %>
+                              <button class="btn btn-secondary" disabled>申請中</button>
+
+                            <% elsif @community_membership.approved? %>
+                              <button class="btn btn-success" disabled>参加済み</button>
+
+                            <% elsif @community_membership.rejected? %>
+                              <button class="btn btn-danger" disabled>却下済み</button>
+                            <% end %>
+
                     </td>
                   </tr>
-
             </tbody>
-
           </table>
+
+          <% if @community.user == current_user %>
+            <% @community.community_memberships.approved.each do |member| %>
+              承認待ち
+            <% end %>
+          <% end %>
+          <br>
+
+          <% if @community.user == current_user %>
+            <% @community.community_memberships.pending.each do |member| %>
+              <%= member.user.name %> さんの参加申請
+            <% end %>
+          <% end %>
+
+          <br>
           <%= link_to "一覧に戻る", communities_path %>
-        <div>
-        <div>
+        </div>
+        </div>

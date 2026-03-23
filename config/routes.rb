@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     root "homes#top"
 
     resources :communities do
-      resources :community_memberships, only: [:index]
+      resources :community_memberships, only: [:index, :create, :update, :destroy]
       resources :posts, only: [:index]
     end
     resources :communities

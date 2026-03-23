@@ -1,23 +1,91 @@
 <h1>マイページ</h1>
 
-<!-- 登録情報 表 -->
-<div class="post-container">
-<table class="user-table">
-  <tr>
-    <th class="bg-light">名前</th>
-    <td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <th class="bg-light">メールアドレス</th>
-    <td><%= @user.email %></td>
-  </tr>
-</table>
+<!-- 左：プロフィール -->
+<div class="mypage-container">
+  <div class="mypage-left">
+    <table class="user-table">
+      <tr>
+        <th class="bg-light">名前</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th class="bg-light">メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th class="bg-light">参加コミュニティ</th>
+        <td>
+        <% if @user.joined_communities.any? %>
+          <% @user.joined_communities.each do |community| %>
+            <%= link_to community.name, community_path(community) %><br>
+          <% end %>
+        <% else %>
+            なし
+        <% end %>
+        </td>
+      </tr>
+      <% if @user.communities.any? %>
+        <tr>
+          <td>オーナーコミュニティ</td>
+          <td>
+          <% @user.communities.each do |community| %>
+            <%= link_to community.name, community_path(community) %>(<%= community.community_memberships.approved.count %>)
+            (<%= community.community_memberships.pending.count %>)<br>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
 
-<%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary px-4" %>
+    <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary px-4" %>
+  </div>
+
+
+<!-- 右：コミュニティ承認待ち -->
+  <div class="mypage-right">
+    <% if @user.communities.any? %>
+      <p>参加申請の承認待ち</p>
+      <% if @pending_memberships.any? %>
+        <table class="user-table-right">
+          <thead>
+            <tr>
+              <th class="bg-light">コミュニティ名</th>
+              <th class="bg-light">申請者</th>
+              <th class="bg-light">申請日</th>
+              <th class="bg-light">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @pending_memberships.each do |membership| %>
+              <tr>
+                <td>
+                  <%= link_to membership.community.name, community_path(membership.community) %>
+                </td>
+                <td><%= membership.user.name %></td>
+                <td><%= membership.created_at.strftime("%Y-%m-%d") %></td>
+                <td>
+                  <div class="action-buttons">
+                  <%= button_to "承認", community_community_membership_path(membership.community, membership),
+                    method: :patch, class: "btn btn-success btn-sm",
+                    data: { confirm: "承認しますか？" } %>
+                  <%= button_to "却下", community_community_membership_path(membership.community, membership),
+                    method: :delete, class: "btn btn-danger btn-sm",
+                    data: { confirm: "却下しますか？" } %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>なし</p>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 
-<div class="post-container">
+  <div class="post-container">
           <table class="post-table">
             <thead>
             <tr>
@@ -32,25 +100,24 @@
 
             <tbody>
               <% if @posts.any? %>
-              <% @posts.each do |post| %>
-              <tr>
-                <td><%= post.date %></td>
-                <td><%= post.user.name %></td>
-                <td><%= post.distance %></td>
-                <td><%= post.formatted_time %></td>
-                <td><%= post.formatted_pace %></td>
-                <td>
-                  <%= link_to "詳細", post_path(post) %>
-                </td>
-              </tr>
-              <% end %>
-
+                <% @posts.each do |post| %>
+                <tr>
+                  <td><%= post.date %></td>
+                  <td><%= post.user.name %></td>
+                  <td><%= post.distance %></td>
+                  <td><%= post.formatted_time %></td>
+                  <td><%= post.formatted_pace %></td>
+                  <td>
+                    <%= link_to "詳細", post_path(post) %>
+                  </td>
+                </tr>
+                <% end %>
               <% else %>
                 <tr>
                   <td colspan="6">投稿がまだありません</td>
                 </tr>
               <% end %>
-
             </tbody>
           </table>
         </div>
+      </div>
