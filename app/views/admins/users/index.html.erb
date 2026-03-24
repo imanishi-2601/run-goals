@@ -1,36 +1,59 @@
 <h1>ユーザー管理</h1>
 
 <div class="col-md-10 offset-md-1">
-          <table class="admins-user-table">
-            <thead>
-            <tr>
-              <th>ユーザーid</th>
-              <th>ユーザー名</th>
-              <th>メールアドレス</th>
-              <th>ステータス</th>
-              <th>権限</th>
-              <th>詳細</th>
-            </tr>
-            </thead>
+  <table class="admins-user-table">
+    <thead>
+      <tr>
+        <th>ユーザーid</th>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+        <th>権限</th>
+        <th>詳細</th>
+        <th>操作</th>
+      </tr>
+    </thead>
 
-            <tbody>
-              <% if @users.any? %>
-              <% @users.each do |user| %>
-              <tr>
-                <td><%= user.id %></td>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td><%= user.status_label %></td>
-                <td><%= user.admin? ? "管理者" : "一般" %></td>
-                <td>詳細</td>
-              </tr>
-              <% end %>
-
+    <tbody>
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.status_label %></td>
+            <td><%= user.admin? ? "管理者" : "一般" %></td>
+            <td><%= link_to "詳細", admins_user_path(user) %></td>
+            <td>
+              <% if !user.admin? && current_user != user %>
+                <% if user.is_active %>
+                  <%= link_to "利用停止",
+                    admins_user_path(user),
+                    class: "btn btn-danger btn-sm",
+                    data: {
+                      turbo_method: :patch,
+                      turbo_confirm: "ユーザーID: #{user.id} / ユーザー名: #{user.name} を利用停止にしますか？"
+                    }%>
+                <% else %>
+                  <%= link_to "利用再開",
+                    admins_user_path(user),
+                    class: "btn btn-primary btn-sm",
+                    data: {
+                      turbo_method: :patch,
+                      turbo_confirm: "ユーザーID: #{user.id}（#{user.name}）の利用を再開しますか？"
+                   } %>
+                <% end %>
               <% else %>
-                <tr>
-                  <td colspan="6">ユーザーがまだいません</td>
-                </tr>
+                -
               <% end %>
-            </tbody>
-          </table>
-        </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="7">ユーザーがまだいません</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

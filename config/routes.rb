@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     resources :communities
     resources :communities, only: [:index, :show, :update, :destroy]
     resources :posts, only: [:index]
-    resources :users, only: [:index]
+    resources :users
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
