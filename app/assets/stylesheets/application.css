@@ -214,3 +214,12 @@ body {
   width: 100%;
   border-collapse: collapse;
 }
+.admins-user-table th,
+.admins-user-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.admins-user-table th {
+  background-color: #f5f5f5;
+}

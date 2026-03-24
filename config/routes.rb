@@ -46,7 +46,11 @@ Rails.application.routes.draw do
   # 管理者
   # =========================================================
   namespace :admins do
-    root "homes#top"
+    root "communities#index"
+
+    get "sign_in", to: "sessions#new"
+    post "sign_in", to: "sessions#create"
+    delete "sign_out", to: "sessions#destroy"
 
     resources :communities do
       resources :community_memberships, only: [:index, :create, :update, :destroy]
@@ -55,7 +59,7 @@ Rails.application.routes.draw do
     resources :communities
     resources :communities, only: [:index, :show, :update, :destroy]
     resources :posts, only: [:index]
-    resources :users, only: [:index]
+    resources :users
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
