@@ -16,12 +16,12 @@ class User < ApplicationRecord
 
   # ステータス
   def status_label
-    super && is_active ? "有効" : "利用停止"
+    is_active ? "有効" : "利用停止"
   end
 
   # 停止ユーザーをログイン不可にするためのメソッド
   def active_for_authentication?
-    super && is_active
+    is_active
   end
   def inactive_message
     is_active ? super : :inactive

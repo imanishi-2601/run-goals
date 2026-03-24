@@ -26,6 +26,10 @@
   <body>
     <%= render "admins/header" %>
       <!--変数を上記に追加、例_'--'post_images: @post_images-->
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
