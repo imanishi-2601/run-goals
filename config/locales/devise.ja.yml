@@ -1,0 +1,6 @@
+ja:
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが違います。"
+      not_found_in_database: "メールアドレスまたはパスワードが違います。"
+      inactive: "このアカウントは利用停止中のためログインできません。"

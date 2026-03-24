@@ -14,7 +14,17 @@ class User < ApplicationRecord
 
   has_many :posts
 
+  # ステータス
   def status_label
-    is_active ? "有効" : "退会済み"
+    super && is_active ? "有効" : "利用停止"
   end
+
+  # 停止ユーザーをログイン不可にするためのメソッド
+  def active_for_authentication?
+    super && is_active
+  end
+  def inactive_message
+    is_active ? super : :inactive
+  end
+
 end
