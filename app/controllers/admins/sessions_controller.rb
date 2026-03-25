@@ -1,12 +1,13 @@
 class Admins::SessionsController < ApplicationController
   def new
+    super
   end
 
   def create
+    super
   end
 
   def destroy
-    sign_out(current_user)
-    redirect_to admins_sign_in_path, notice: "ログアウトしました。"
+    super
   end
 end
