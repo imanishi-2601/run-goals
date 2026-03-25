@@ -1,3 +1,6 @@
+<!-- 管理者ログイン経由かを判定 -->
+<%= hidden_field_tag :admin_login, true %>
+
 <h2>管理者ログイン</h2>
 
 <%= form_with scope: :user, url: user_session_path, local: true do |f| %>
