@@ -46,6 +46,8 @@ class CommunitiesController < ApplicationController
       )
     else
       @communities = Community.none
+      flash.now[:alert] = "キーワードを入力してください"
+      render :index
    end
   end
 
