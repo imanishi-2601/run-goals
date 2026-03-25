@@ -7,6 +7,11 @@
         <div class="col-md-8 offset-md-1 user-right">
           <%= render "shared/search_form" %>
 
+          <!-- 検索失敗時のフラッシュメッセージ -->
+          <% if flash.now[:alert] %>
+            <p class="text-danger"><%= flash.now[:alert] %></p>
+          <% end %>
+
           <div class="community-actions">
             <%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
           </div>
