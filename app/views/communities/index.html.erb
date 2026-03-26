@@ -7,6 +7,11 @@
         <div class="col-md-8 offset-md-1 user-right">
           <%= render "shared/search_form" %>
 
+          <!-- 検索失敗時のフラッシュメッセージ -->
+          <% if flash.now[:alert] %>
+            <p class="text-danger"><%= flash.now[:alert] %></p>
+          <% end %>
+
           <div class="community-actions">
             <%= link_to "新規作成", new_community_path, class: "btn btn-primary px-4"%>
           </div>
@@ -16,6 +21,7 @@
             <tr>
               <th>コミュニティ名</th>
               <th>コミュニティ紹介</th>
+              <th>参加状況</th>
               <th></th>
             </tr>
             </thead>
@@ -26,6 +32,7 @@
                   <tr>
                     <td><%= community.name %></td>
                     <td><%= community.introduction %></td>
+                    <td><%= community.name %></td>
                     <td>
                       <%= link_to "詳細", community_path(community) %>
                     </td>

@@ -15,6 +15,7 @@
       <tr>
         <td><%= community.name %></td>
         <td><%= community.introduction %></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,3 +24,5 @@
 <% else %>
   <p>該当するコミュニティはありません</p>
 <% end %>
+
+<%= link_to "一覧に戻る", communities_path %>
