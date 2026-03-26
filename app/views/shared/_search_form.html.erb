@@ -1,5 +1,5 @@
-<%= form_with url: search_communities_path, method: :get, local: true do |f| %>
-  <%= f.text_field :keyword, placeholder: "キーワード検索" %>
+<%= form_with url: search_communities_path, method: :get, local: true, id: "search-form" do |f| %>
+  <%= f.text_field :keyword, placeholder: "キーワード検索", id: "search-keyword" %>
 
   <%= f.select :match,
     options_for_select(
@@ -13,4 +13,6 @@
   <% if params[:q].present? %>
     <%= link_to "クリア", search_path %>
   <% end %>
+
+  <p id="search-error" class="text-danger mt-2"></p>
 <% end %>

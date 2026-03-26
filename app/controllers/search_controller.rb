@@ -1,21 +1,15 @@
 class SearchController < ApplicationController
   def index
-    @q = params[:q]
-    @match = params[:match]
-    @scope = params[:scope]
+    @keyword = params[:keyword]
 
-    if @scope == "communities"
-      @communities = Community.where("name LIKE ?", "%#{@q}%")
+    # 未入力検索時のエラーメッセージ表示
+    if @keyword.blank?
+      flash.now[:alert] = "キーワードを入力してください"
+      @communities = []
+      return
     end
-  end
 
-    def search
-    @q = params[:q]
-    @match = params[:match]
-    @scope = params[:scope]
+    @communities = Community.where("name LIKE ?", "%#{@keyword}%")
 
-    if @scope == "communities"
-      @communities = Community.where("name LIKE ?", "%#{@q}%")
-    end
   end
 end
