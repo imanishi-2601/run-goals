@@ -10,7 +10,7 @@
 
   <%= f.submit "検索" %>
 
-  <% if params[:q].present? %>
+  <% if params[:keyword].present? %>
     <%= link_to "クリア", search_path %>
   <% end %>
 

@@ -9,57 +9,51 @@
         <th>メールアドレス</th>
         <th>ステータス</th>
         <th>権限</th>
-        <th>詳細</th>
-        <th>操作</th>
         <th>投稿数</th>
-        <th>コミュニティ数</th>
+        <th>コミュニティ参加数</th>
         <th>登録日</th>
+        <th>操作</th>
       </tr>
     </thead>
 
     <tbody>
-      <% if @users.any? %>
-        <% @users.each do |user| %>
+
           <tr>
-            <td><%= user.id %></td>
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.status_label %></td>
-            <td><%= user.admin? ? "管理者" : "一般" %></td>
-            <td><%= link_to "詳細", admins_user_path(user) %></td>
+            <td><%= @user.id %></td>
+            <td><%= @user.name %></td>
+            <td><%= @user.email %></td>
+            <td><%= @user.status_label %></td>
+            <td><%= @user.admin? ? "管理者" : "一般" %></td>
+            <td><%= @user.posts.count %></td>
+            <td><%= @user.communities.count %></td>
+            <td><%= @user.created_at.strftime("%Y/%m/%d") %></td>
             <td>
-              <% if !user.admin? && current_user != user %>
-                <% if user.is_active %>
+              <% if !@user.admin? && current_user != @user %>
+                <% if @user.is_active %>
                   <%= link_to "利用停止",
-                    admins_user_path(user),
+                    admins_user_path(@user),
                     class: "btn btn-danger btn-sm",
                     data: {
                       turbo_method: :patch,
-                      turbo_confirm: "ユーザーID: #{user.id} / ユーザー名: #{user.name} を利用停止にしますか？"
+                      turbo_confirm: "ユーザーID: #{@user.id} / ユーザー名: #{@user.name} を利用停止にしますか？"
                     }%>
                 <% else %>
                   <%= link_to "利用再開",
-                    admins_user_path(user),
+                    admins_user_path(@user),
                     class: "btn btn-primary btn-sm",
                     data: {
                       turbo_method: :patch,
-                      turbo_confirm: "ユーザーID: #{user.id}（#{user.name}）の利用を再開しますか？"
+                      turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）の利用を再開しますか？"
                    } %>
                 <% end %>
               <% else %>
                 -
               <% end %>
             </td>
-            <td><%= user.posts.count %></td>
-            <td><%= user.communities.count %></td>
-            <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
           </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td colspan="7">ユーザーがまだいません</td>
-        </tr>
-      <% end %>
+
     </tbody>
   </table>
+
+  <%= link_to "一覧へ戻る", admins_users_path %>
 </div>

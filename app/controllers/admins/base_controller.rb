@@ -6,7 +6,7 @@ class Admins::BaseController < ApplicationController
 
   def authenticate_admin!
     unless user_signed_in?
-      redirect_to admins_sign_in_path, alert: "管理者としてログインしてください。"
+      redirect_to admins_sign_in_path
       return
     end
 
