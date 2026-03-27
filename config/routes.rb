@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # =========================================================
   # 新規登録（サインアップ）
   # ログイン
-  devise_for :users
+  devise_for :users # devise標準のルーティングを使用
 
   resources :users
 

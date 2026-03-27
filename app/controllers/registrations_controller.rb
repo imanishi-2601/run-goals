@@ -7,8 +7,9 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path
+      sign_in(@user)  # Devise標準のサインイン処理を呼ぶ
+      # session[:user_id] = @user.id
+      redirect_to communities_path
     else
       Rails.logger.debug @user.errors.full_messages
       render :new, status: :unprocessable_entity

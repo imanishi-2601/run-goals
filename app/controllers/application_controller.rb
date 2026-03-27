@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :check_user_active
 
   protected
-  # サインイン後のリダイレクト先
+  # ログイン後のリダイレクト先
   # ユーザーが作成したコミュニティの保留中の参加申請がある場合はマイページへ、ない場合はコミュニティ一覧へ
   def after_sign_in_path_for(resource)
     if params[:admin_login] == "true"
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
         communities_path
       end
     end
+  end
+  # サインアップ後のリダイレクト先
+  def after_inactive_sign_up_path_for(resource)
+    communities_path
   end
 
   def configure_permitted_parameters
