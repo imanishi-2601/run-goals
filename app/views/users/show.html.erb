@@ -1,4 +1,8 @@
-<h1>マイページ</h1>
+<% if @user == current_user %>
+  <h1>マイページ</h1>
+<% else %>
+  <h1>ユーザー詳細</h1>
+<% end %>
 
 <!-- 左：プロフィール -->
 <div class="mypage-container">
@@ -91,6 +95,7 @@
             <tr>
               <th>日付</th>
               <th>名前</th>
+              <th>コミュニティ</th>
               <th>距離[km]</th>
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
@@ -104,6 +109,7 @@
                 <tr>
                   <td><%= post.date %></td>
                   <td><%= post.user.name %></td>
+                  <td><%= post.community&.name || "未設定" %></td>
                   <td><%= post.distance %></td>
                   <td><%= post.formatted_time %></td>
                   <td><%= post.formatted_pace %></td>

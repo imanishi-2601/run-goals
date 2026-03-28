@@ -48,5 +48,6 @@
     </div>
   </div>
 
-  <%= f.submit "更新する" %>
+  <%= f.submit "更新する", class: "btn-cancel" %>
+  <%= link_to "キャンセル", community_post_path(@post.community, @post), class: "btn-cancel" %>
 <% end %>

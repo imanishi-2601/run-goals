@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
 
     # ユーザーが作成したコミュニティの保留中の参加申請を取得

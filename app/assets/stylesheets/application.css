@@ -184,7 +184,46 @@
   border: 1px solid #ccc;
   padding: 10px;
 }
+.post-table .col-date {
+  width: 110px;
+}
+.post-table .col-name {
+  width: 100px;
+  word-break: break-word;
+  white-space: normal;
+}
+.post-table .col-distance {
+  width: 100px;
+  text-align: right;
+}
+.post-table .col-time {
+  width: 130px;
+}
+.post-table .col-pace {
+  width: 140px;
+}
+.post-table .col-memo {
+  word-break: break-word;
+  white-space: normal;
+}
+.post-table .col-action {
+  width: 70px;
+  white-space: nowrap;
+}
 
+/* キャンセルボタン */
+.btn-cancel {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f8f8f8;
+  border: 1px solid #999;
+  color: #000;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.btn-cancel:hover {
+  background-color: #e6e6e6;
+}
 /**/
 .form-header,
 .form-input{
