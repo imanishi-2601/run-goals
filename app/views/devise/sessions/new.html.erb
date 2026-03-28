@@ -9,6 +9,9 @@
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <!-- 遷移先を分岐するためのログイン種判定（ユーザー用） -->
+  <%= hidden_field_tag :admin_login, "false" %>
+
   <div class="field">
     <p><%= f.label :email %></p>
     <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
