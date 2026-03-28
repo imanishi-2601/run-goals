@@ -19,6 +19,7 @@ class CommunitiesController < ApplicationController
     @community.user = current_user
 
     if @community.save
+      @community.community_memberships.create(user: current_user, status: :approved)
       redirect_to communities_path
     else
       render :new, status: :unprocessable_entity

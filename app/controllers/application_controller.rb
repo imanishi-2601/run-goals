@@ -7,14 +7,10 @@ class ApplicationController < ActionController::Base
   # ログイン後のリダイレクト先
   # ユーザーが作成したコミュニティの保留中の参加申請がある場合はマイページへ、ない場合はコミュニティ一覧へ
   def after_sign_in_path_for(resource)
-    if params[:admin_login] == "true"
+    if params[:admin_login] == "false"
       flash.delete(:notice)
-      return admins_root_path
-    end
 
-    if resource.admin?
-      admins_root_path
-    else
+
       pending_memberships = CommunityMembership
         .joins(:community)
         .where(communities: { user_id: resource.id })

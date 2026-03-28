@@ -96,6 +96,17 @@
   word-break: break-word;
 }
 
+.community-table-pending {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  width: 150px;
+  table-layout: fixed;
+}
+.community-table-pending th,
+.community-table-pending td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
 
 /* 投稿（ユーザー） */
 .form-row{
