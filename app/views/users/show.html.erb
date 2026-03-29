@@ -41,11 +41,16 @@
       <% end %>
     </table>
 
-    <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary" %>
-    <%= link_to "退会する",
-            user_path(current_user),
-            data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" },
-            class: "btn btn-danger" %>
+    <br>
+
+    <% if @user == current_user %>
+      <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary" %>
+
+      <%= link_to "退会する",
+          user_path(@user),
+          data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" },
+          class: "btn btn-danger" %>
+    <% end %>
   </div>
 
 
@@ -92,8 +97,9 @@
   </div>
 </div>
 
-
+<br>
   <div class="post-container">
+  <h3>投稿一覧</h3>
           <table class="post-table">
             <thead>
             <tr>
@@ -103,7 +109,9 @@
               <th>距離[km]</th>
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
-              <th></th>
+              <% if @posts.any? %>
+                <th></th>
+              <% end %>
             </tr>
             </thead>
 

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   # get "users/show" => "users#"
 
   # 全投稿一覧用
-  resources :posts, only: [:index, :show, :new, :create]
+  resources :posts
   # コミュニティ別投稿一覧用
   resources :communities do
     resources :posts, only: [:index]
