@@ -17,4 +17,5 @@ class Admins::CommunitiesController < Admins::BaseController
     @community.destroy
     redirect_to admins_communities_path, notice: "コミュニティを削除しました。"
   end
+
 end

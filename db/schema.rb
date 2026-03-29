@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_29_030538) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_29_040401) do
   create_table "communities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.text "introduction"
     t.integer "user_id"
+    t.integer "pending_owner_id"
   end
 
   create_table "community_memberships", force: :cascade do |t|

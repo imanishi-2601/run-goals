@@ -28,6 +28,14 @@ class UsersController < ApplicationController
 
   def destroy
     @user = current_user
+
+    owned_communities = Community.where(user_id: @user.id)
+
+    if owned_communities.exists?
+      redirect_to user_path(@user), alert: "管理者のコミュニティが残っているため退会できません。管理者移行を完了してください。"
+      return
+    end
+
     @user.destroy
     reset_session
     redirect_to root_path, notice: "退会しました"

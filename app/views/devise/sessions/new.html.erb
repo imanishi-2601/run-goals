@@ -1,13 +1,5 @@
 <h2>Log in</h2>
 
-<% if notice.present? %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-
-<% if alert.present? %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <!-- 遷移先を分岐するためのログイン種判定（ユーザー用） -->
   <%= hidden_field_tag :admin_login, "false" %>

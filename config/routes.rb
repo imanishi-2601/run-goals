@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # ログイン
   devise_for :users # devise標準のルーティングを使用
 
-  resources :users
+  resources :users, only: [:show, :edit, :update, :destroy]
 
   # コミュニティ
   resources :communities do
@@ -27,6 +27,12 @@ Rails.application.routes.draw do
 
     resources :community_memberships, only: [:index, :create, :update, :destroy]
     resources :posts
+    # 管理者移行用のルート
+    member do
+      patch :request_owner_transfer
+      patch :accept_owner_transfer
+      patch :reject_owner_transfer
+    end
   end
 
   resources :users, only: [:show, :edit, :update, :destroy]

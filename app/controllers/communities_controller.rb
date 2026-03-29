@@ -52,6 +52,63 @@ class CommunitiesController < ApplicationController
    end
   end
 
+    # 管理者移行依頼のアクション
+  def request_owner_transfer
+    @community = Community.find(params[:id])
+
+    # 権限チェック（作成者のみ）
+    unless @community.user_id == current_user.id
+      redirect_to community_community_memberships_path(@community), alert: "権限がありません"
+      return
+    end
+
+    new_owner = User.find(params[:new_owner_id])
+
+    # メンバーか確認
+    membership = @community.community_memberships.find_by(user_id: new_owner.id)
+
+    unless membership&.approved?
+      redirect_to community_community_memberships_path(@community), alert: "参加中メンバーのみ管理者にできます"
+      return
+    end
+
+    @community.update(pending_owner_id: new_owner.id)
+
+    redirect_to community_community_memberships_path(@community),
+              notice: "管理者変更を#{new_owner.name}さんに依頼しました"
+  end
+
+    # 管理者移行依頼を受けたユーザーが承認するためのアクション
+  def accept_owner_transfer
+    @community = Community.find(params[:id])
+
+    unless @community.pending_owner_id == current_user.id
+      redirect_to community_path(@community), alert: "この依頼を承認する権限がありません"
+      return
+    end
+
+    @community.update(
+      user_id: current_user.id,
+      pending_owner_id: nil
+    )
+
+    redirect_to community_path(@community), notice: "管理者を引き継ぎました"
+  end
+
+  # 管理者移行依頼を受けたユーザーが辞退するためのアクション
+  def reject_owner_transfer
+    @community = Community.find(params[:id])
+
+    unless @community.pending_owner_id == current_user.id
+      redirect_to community_path(@community), alert: "この依頼を辞退する権限がありません"
+      return
+    end
+
+    @community.update(pending_owner_id: nil)
+
+    redirect_to community_path(@community), notice: "管理者変更依頼を辞退しました"
+  end
+
 private
 
   def community_params
