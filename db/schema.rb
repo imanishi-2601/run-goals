@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_27_043740) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_29_040401) do
   create_table "communities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.text "introduction"
     t.integer "user_id"
+    t.integer "pending_owner_id"
   end
 
   create_table "community_memberships", force: :cascade do |t|
@@ -55,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_043740) do
     t.string "name"
     t.boolean "admin", default: false, null: false
     t.boolean "is_active", default: true, null: false
+    t.datetime "withdrawn_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

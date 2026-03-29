@@ -34,6 +34,10 @@
         <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59, class: "time-input" %>
       </div>
     </div>
+    <div class="post-column">
+      <div class="post-label">対象コミュニティ</div>
+      <%= f.collection_select :community_id, current_user.joined_communities, :id, :name, { prompt: "コミュニティを選択" }, { class: "post-input" } %>
+    </div>
     <div class="post-column memo-column">
       <div class="post-label">メモ/感想</div>
       <div class="post-input">

@@ -1,39 +1,44 @@
 <h1>投稿詳細</h1>
 
-        <div>
-        <div class="post-container">
-          <table class="post-table">
-            <thead>
-              <th>日付</th>
-              <th>名前</th>
-              <th>距離[km]</th>
-              <th>時間[秒]</th>
-              <th>ペース[秒/km]</th>
-              <th>メモ・感想</th>
-              <th>コメント</th>
-              <th></th>
-              <th></th>
-            </thead>
+<div>
+  <div class="post-container">
+  <% is_owner = @post.user_id == current_user.id %>
+    <table class="post-table">
+      <thead>
+        <tr>
+          <th class="col-date">日付</th>
+          <th class="col-name">名前</th>
+          <th class="col-distance">距離[km]</th>
+          <th class="col-time">時間[時:分:秒]</th>
+          <th class="col-pace">ペース[分:秒/km]</th>
+          <th class="col-memo">メモ・感想</th>
 
-            <tbody>
-              <tr>
-                <td><%= @post.date %></td>
-                <td><%= link_to @post.user.name, user_path(@post.user) %></td>
-                <td><%= @post.distance %></td>
-                <td><%= @post.time %></td>
-                <td>
-                  <% if @post.distance.present? && @post.distance.to_f > 0 && @post.time.present? %>
-                    <%= (@post.time / @post.distance).round(1) %>
-                 <% end %>
-                </td>
-                <td><%= @post.memo %></td>
-                <td></td>
-                <td><%= link_to "編集", edit_community_post_path(@post) %></td>
-                <td>
-                  <%= link_to "削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        </div>
+          <% if is_owner %>
+            <th class="col-action"></th>
+            <th class="col-action"></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="col-date"><%= @post.date %></td>
+          <td class="col-name"><%= link_to @post.user.name, user_path(@post.user) %></td>
+          <td class="col-distance"><%= @post.distance %></td>
+          <td class="col-time"><%= @post.formatted_time %></td>
+          <td class="col-pace"><%= @post.formatted_pace %></td>
+          <td class="col-memo"><%= @post.memo %></td>
+          <%# 投稿の編集・削除は投稿者のみが可能 %>
+          <% if is_owner %>
+            <td class="col-action"><%= link_to "編集", edit_community_post_path(@post) %></td>
+            <td class="col-action">
+              <%= link_to "削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <%= link_to "一覧へ戻る", posts_path(@post) %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  belongs_to :community
+  belongs_to :community, optional: true
 
   validates :date, presence: true
   validates :distance, presence: true

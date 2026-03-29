@@ -4,13 +4,12 @@ class PostsController < ApplicationController
     if params[:community_id].present?
       @community = Community.find(params[:community_id])
 
-      @posts = Post.joins(:user)
-                  .joins("INNER JOIN community_memberships
-                        ON community_memberships.user_id = users.id")
-                  .where(community_memberships: { community_id: @community.id })
-
+      @posts = Post.includes(:user, :community)
+                 .where(community_id: @community.id)
+                 .order(created_at: :desc)
     else
-      @posts = Post.all
+      @posts = Post.includes(:user, :community)
+                 .order(created_at: :desc)
     end
   end
 

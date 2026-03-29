@@ -26,6 +26,13 @@
   <body>
     <%= render 'shared/header' %>
       <!--変数を上記に追加、例_'--'post_images: @post_images-->
+    <% if notice.present? %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+
+    <% if alert.present? %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

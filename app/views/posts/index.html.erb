@@ -1,41 +1,51 @@
-<h1>投稿一覧</h1>
+<% if @community.present? %>
+  <h1><%= @community.name %>の投稿一覧</h1>
+<% else %>
+  <h1>全投稿一覧</h1>
+<% end %>
 
-        <div>
-        <div class="post-container">
-          <table class="post-table">
-            <thead>
+<div>
+  <div class="post-container">
+    <table class="post-table">
+      <thead>
+        <tr>
+          <th class="col-date">日付</th>
+          <th class="col-name">名前</th>
+          <th class="col-distance">距離[km]</th>
+          <th class="col-time">時間[時:分:秒]</th>
+          <th class="col-pace">ペース[分:秒/km]</th>
+          <th class="col-action"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @posts.any? %>
+          <% @posts.each do |post| %>
             <tr>
-              <th>日付</th>
-              <th>名前</th>
-              <th>距離[km]</th>
-              <th>時間[時:分:秒]</th>
-              <th>ペース[分:秒/km]</th>
-              <th></th>
+              <td class="col-date"><%= post.date %></td>
+              <td class="col-name"><%= post.user.name %></td>
+              <td class="col-distance"><%= post.distance %></td>
+              <td class="col-time"><%= post.formatted_time %></td>
+              <td class="col-pace"><%= post.formatted_pace %></td>
+              <td class="col-action">
+                <%= link_to "詳細", post_path(post) %>
+              </td>
             </tr>
-            </thead>
+          <% end %>
 
-            <tbody>
-              <% if @posts.any? %>
-              <% @posts.each do |post| %>
-              <tr>
-                <td><%= post.date %></td>
-                <td><%= post.user.name %></td>
-                <td><%= post.distance %></td>
-                <td><%= post.formatted_time %></td>
-                <td><%= post.formatted_pace %></td>
-                <td>
-                  <%= link_to "詳細", post_path(post) %>
-                </td>
-              </tr>
-              <% end %>
+        <% else %>
+          <tr>
+            <td colspan="6">投稿がまだありません</td>
+          </tr>
+        <% end %>
 
-              <% else %>
-                <tr>
-                  <td colspan="6">投稿がまだありません</td>
-                </tr>
-              <% end %>
-
-            </tbody>
-          </table>
-        </div>
-        </div>
+      </tbody>
+    </table>
+    <br>
+    <% if @community.present? %>
+      <%= link_to "コミュニティ詳細へ戻る", community_path(@community), class: "btn-common" %>
+    <% else %>
+      <%= link_to "コミュニティ一覧へ戻る", communities_path, class: "btn-common" %>
+    <% end %>
+  </div>
+</div>

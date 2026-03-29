@@ -1,4 +1,8 @@
-<h1>マイページ</h1>
+<% if @user == current_user %>
+  <h1>マイページ</h1>
+<% else %>
+  <h1>ユーザー詳細</h1>
+<% end %>
 
 <!-- 左：プロフィール -->
 <div class="mypage-container">
@@ -37,7 +41,16 @@
       <% end %>
     </table>
 
-    <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary px-4" %>
+    <br>
+
+    <% if @user == current_user %>
+      <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary" %>
+
+      <%= link_to "退会する",
+          user_path(@user),
+          data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" },
+          class: "btn btn-danger" %>
+    <% end %>
   </div>
 
 
@@ -84,17 +97,21 @@
   </div>
 </div>
 
-
+<br>
   <div class="post-container">
+  <h3>投稿一覧</h3>
           <table class="post-table">
             <thead>
             <tr>
               <th>日付</th>
               <th>名前</th>
+              <th>コミュニティ</th>
               <th>距離[km]</th>
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
-              <th></th>
+              <% if @posts.any? %>
+                <th></th>
+              <% end %>
             </tr>
             </thead>
 
@@ -104,6 +121,7 @@
                 <tr>
                   <td><%= post.date %></td>
                   <td><%= post.user.name %></td>
+                  <td><%= post.community&.name || "未設定" %></td>
                   <td><%= post.distance %></td>
                   <td><%= post.formatted_time %></td>
                   <td><%= post.formatted_pace %></td>

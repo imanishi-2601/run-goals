@@ -9,7 +9,7 @@
 
 <%= form_with url: admins_sign_in_path, method: :post, local: true do |f| %>
 
-  <!-- 管理者ログイン経由かを判定 -->
+  <!-- 遷移先を分岐するためのログイン種判定（管理者用） -->
   <%= hidden_field_tag :admin_login, true %>
 
   <div class="mb-3">

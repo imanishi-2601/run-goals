@@ -1,60 +1,72 @@
 <h1>コミュニティ詳細</h1>
 
-        <div>
-        <div class="community-container">
-          <table class="community-table">
-            <thead>
+<div class="community-show-wrapper">
+  <div class="community-container">
+    <table class="community-table">
+      <thead>
+        <tr>
+          <th>コミュニティ名</th>
+          <th>コミュニティ紹介</th>
+          <th>作成者</th>
+          <th>メンバー一覧</th>
+          <th>投稿一覧</th>
+          <th>参加申請</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= @community.name %></td>
+          <td><%= @community.introduction %></td>
+          <td><%= @community.user.name %></td>
+          <td><%= link_to "メンバー", community_community_memberships_path(@community) %></td>
+          <td><%= link_to "投稿", community_posts_path(@community) %></td>
+          <td><% if @community_membership.nil? %>
+                <%= button_to "参加申請",
+                  community_community_memberships_path(@community),
+                    ethod: :post,
+                    data: { turbo_confirm: "このコミュニティに参加申請しますか？" },
+                    class: "btn btn-primary" %>
+
+              <% elsif @community_membership.pending? %>
+                <button class="btn btn-secondary" disabled>申請中</button>
+
+              <% elsif @community_membership.approved? %>
+              <button class="btn btn-success" disabled>参加済み</button>
+
+              <% elsif @community_membership.rejected? %>
+                <button class="btn btn-danger" disabled>却下済み</button>
+              <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "編集", edit_community_path(@community), class: "btn btn-primary px-4"
+ %>
+    <%= link_to "一覧に戻る", communities_path, class: "btn btn-outline-secondary" %>
+    <br>
+    <% if @community.user == current_user %>
+    <br>
+    <table class="community-table-pending">
+      <thead>
+        <tr>
+          <th>未承認の参加申請</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @community.community_memberships.pending.any? %>
+          <% @community.community_memberships.pending.each do |member| %>
             <tr>
-              <th>コミュニティ名</th>
-              <th>コミュニティ紹介</th>
-              <th>メンバー一覧</th>
-              <th>投稿一覧</th>
-              <th>参加申請</th>
+              <td><%= member.user.name %></td>
             </tr>
-            </thead>
-
-            <tbody>
-                  <tr>
-                    <td><%= @community.name %></td>
-                    <td><%= @community.introduction %></td>
-                    <td><%= link_to "メンバー", community_community_memberships_path(@community) %></td>
-                    <td><%= link_to "投稿", community_posts_path(@community) %></td>
-                    <td><% if @community_membership.nil? %>
-                          <%= button_to "参加申請",
-                              community_community_memberships_path(@community),
-                              method: :post,
-                              data: { turbo_confirm: "このコミュニティに参加申請しますか？" },
-                              class: "btn btn-primary" %>
-
-                            <% elsif @community_membership.pending? %>
-                              <button class="btn btn-secondary" disabled>申請中</button>
-
-                            <% elsif @community_membership.approved? %>
-                              <button class="btn btn-success" disabled>参加済み</button>
-
-                            <% elsif @community_membership.rejected? %>
-                              <button class="btn btn-danger" disabled>却下済み</button>
-                            <% end %>
-
-                    </td>
-                  </tr>
-            </tbody>
-          </table>
-
-          <% if @community.user == current_user %>
-            <% @community.community_memberships.approved.each do |member| %>
-              承認待ち
-            <% end %>
           <% end %>
-          <br>
-
-          <% if @community.user == current_user %>
-            <% @community.community_memberships.pending.each do |member| %>
-              <%= member.user.name %> さんの参加申請
-            <% end %>
-          <% end %>
-
-          <br>
-          <%= link_to "一覧に戻る", communities_path %>
-        </div>
-        </div>
+        <% else %>
+          <tr>
+            <td>申請者はいません</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<h1>コミュニティ編集</h1>
+
+<div class="community-container">
+  <div class="container community-show">
+    <div class="row">
+      <div class="col-md-8 offset-md-1 user-right">
+        <%= form_with model: @community, local: true do |f| %>
+          <div>
+            <%= f.label :name, "名前" %>
+            <%= f.text_field :name, class: "form-control w-50" %>
+          </div>
+
+          <div>
+            <%= f.label :introduction, "紹介文" %>
+            <%= f.text_area :introduction, class: "form-control", rows: 3 %>
+          </div>
+
+          <div>
+            <%= f.submit "更新する", class: "btn btn-primary px-4" %>
+            <%= link_to "詳細へ戻る", community_path(@community), class: "btn btn-outline-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

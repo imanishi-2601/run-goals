@@ -4,3 +4,10 @@ ja:
       invalid: "メールアドレスまたはパスワードが違います。"
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
       inactive: "このアカウントは利用停止中のためログインできません。"
+      user:
+        inactive: "このアカウントは利用停止中のためログインできません。"
+
+    sessions:
+      user:
+        signed_in: "ログインしました。"
+        signed_out: "ログアウトしました。"
