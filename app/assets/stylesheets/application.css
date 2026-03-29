@@ -80,22 +80,120 @@
   padding: 10px;
 }
 .community-container {
-  max-width: 1000px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
 }
+/* 1列目 コミュニティ名 */
 .community-table th:nth-child(1),
 .community-table td:nth-child(1) {
-  width: 150px;
+  width: 30%;
 }
-.community-table th:nth-child(3),
-.community-table td:nth-child(3) {
-  width: 80px;
-}
+/* 2列目 コミュニティ紹介 */
 .community-table th:nth-child(2),
 .community-table td:nth-child(2) {
   word-break: break-word;
 }
 
+/* 3列目 作成者 */
+.community-table th:nth-child(3),
+.community-table td:nth-child(3) {
+  width: 8%;
+  white-space: nowrap;
+}
+
+/* 4列目 メンバー一覧 */
+.community-table th:nth-child(4),
+.community-table td:nth-child(4) {
+  width: 10%;
+  white-space: nowrap;
+}
+
+/* 5列目 投稿一覧 */
+.community-table th:nth-child(5),
+.community-table td:nth-child(5) {
+  width: 10%;
+  white-space: nowrap;
+}
+
+/* 6列目 参加申請 */
+.community-table th:nth-child(6),
+.community-table td:nth-child(6) {
+  width: 12%;
+  white-space: nowrap;
+}
+
+.community-table th,
+.community-table td {
+  padding: 8px 12px;
+}
+
+.community-table-pending {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  width: 150px;
+  table-layout: fixed;
+}
+.community-table-pending th,
+.community-table-pending td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.community-show-wrapper {
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.community-container {
+  width: 100%;
+}
+
+.community-table {
+  width: 100%;
+}
+
+/* コミュニティ一覧（管理者） */
+.admin-community-table th:nth-child(1),
+.admin-community-table td:nth-child(1) {
+  width: 20%;
+}
+
+.admin-community-table th:nth-child(2),
+.admin-community-table td:nth-child(2) {
+  width: 40%;
+  word-break: break-word;
+}
+
+.admin-community-table th:nth-child(3),
+.admin-community-table td:nth-child(3) {
+  width: 13%;
+  white-space: nowrap;
+}
+
+.admin-community-table th:nth-child(4),
+.admin-community-table td:nth-child(4) {
+  width: 13%;
+  white-space: nowrap;
+}
+
+.admin-community-table th:nth-child(5),
+.admin-community-table td:nth-child(5) {
+  width: 14%;
+  white-space: nowrap;
+}
+/* コミュニティメンバー管理（管理者） */
+.admin-membership-table th:nth-child(1),
+.admin-membership-table td:nth-child(1) {
+  width: 70%;
+}
+
+.admin-membership-table th:nth-child(2),
+.admin-membership-table td:nth-child(2) {
+  width: 30%;
+  white-space: nowrap;
+}
 
 /* 投稿（ユーザー） */
 .form-row{
