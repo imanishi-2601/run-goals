@@ -36,8 +36,12 @@
 - 大会に向けて練習計画を作成するとき
 ​
 ## 設計書
-後ほど作成予定
-​
+- ワイヤーフレーム(ユーザー/User)https://drive.google.com/file/d/1n5uB0uUesP27oBAFQxwdx1IPylzQxyYg/view?usp=drive_link
+- ワイヤーフレーム(管理者/Admin)https://drive.google.com/file/d/13bwNgD8pwM3BKMzw3SgfxiiaYs_V4u9w/view?usp=drive_link
+- ER図https://drive.google.com/file/d/1OFyUJVWBqQVv-r0aTWKxSWTkt747fV1z/view?usp=drive_link
+- アプリケーション詳細設計書https://docs.google.com/spreadsheets/d/1n90Sk3HyvGL98lFHr2iPwd8wch-H95llCUf5kegE4Iw/edit?usp=drive_link
+- テーブル定義書https://docs.google.com/spreadsheets/d/1ofds5hw_N9BXxFayoMjTbw-axXD0XyFrjJukU_pkk8E/edit?usp=drive_link​
+
 ## 開発環境
 - OS：Windows
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
