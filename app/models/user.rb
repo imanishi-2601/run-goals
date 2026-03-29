@@ -16,7 +16,13 @@ class User < ApplicationRecord
 
   # ステータス
   def status_label
-    is_active ? "有効" : "利用停止"
+    if withdrawn_at.present?
+      "退会済み"
+    elsif is_active
+      "有効"
+    else
+      "利用停止"
+    end
   end
 
   # 停止ユーザーをログイン不可にするためのメソッド
