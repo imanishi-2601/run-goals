@@ -4,7 +4,7 @@
 
   <div class="container community-show">
     <div class="row">
-        <div class="col-md-8 offset-md-1 user-right">
+        <div class="col-md-10 offset-md-1 user-right">
           <%= render "shared/search_form" %>
           <%= render "shared/communities", communities: @communities,
               detail_path: ->(community) { admins_community_path(community) } %>

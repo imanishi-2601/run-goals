@@ -28,28 +28,42 @@
             <td><%= @user.communities.count %></td>
             <td><%= @user.created_at.strftime("%Y/%m/%d") %></td>
             <td>
-              <% if !@user.admin? && current_user != @user %>
-                <% if @user.is_active %>
-                  <%= link_to "利用停止",
-                    admins_user_path(@user),
-                    class: "btn btn-danger btn-sm",
-                    data: {
-                      turbo_method: :patch,
-                      turbo_confirm: "ユーザーID: #{@user.id} / ユーザー名: #{@user.name} を利用停止にしますか？"
-                    }%>
-                <% else %>
-                  <%= link_to "利用再開",
-                    admins_user_path(@user),
-                    class: "btn btn-primary btn-sm",
-                    data: {
-                      turbo_method: :patch,
-                      turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）の利用を再開しますか？"
-                   } %>
-                <% end %>
-              <% else %>
-                -
-              <% end %>
-            </td>
+  <% if !@user.admin? && current_user != @user %>
+    <% if @user.is_active %>
+      <%= link_to "利用停止",
+        admins_user_path(@user),
+        class: "btn btn-danger btn-sm",
+        data: {
+          turbo_method: :patch,
+          turbo_confirm: "ユーザーID: #{@user.id} / ユーザー名: #{@user.name} を利用停止にしますか？"
+        } %>
+
+      <%= link_to "退会",
+        "#",
+        class: "btn btn-secondary btn-sm disabled",
+        title: "退会は利用停止中のユーザーのみ可能です" %>
+
+    <% else %>
+      <%= link_to "利用再開",
+        admins_user_path(@user),
+        class: "btn btn-primary btn-sm",
+        data: {
+          turbo_method: :patch,
+          turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）の利用を再開しますか？"
+        } %>
+
+      <%= link_to "退会",
+        admins_user_path(@user),
+        class: "btn btn-danger btn-sm me-1",
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）を退会処理しますか？この操作は取り消せません。"
+        } %>
+    <% end %>
+  <% else %>
+    -
+  <% end %>
+</td>
           </tr>
 
     </tbody>

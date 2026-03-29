@@ -83,17 +83,21 @@
   max-width: 1000px;
   margin: 0 auto;
 }
+
 .community-table th:nth-child(1),
 .community-table td:nth-child(1) {
-  width: 150px;
+  width: 40%;
 }
-.community-table th:nth-child(3),
-.community-table td:nth-child(3) {
-  width: 80px;
-}
+
 .community-table th:nth-child(2),
 .community-table td:nth-child(2) {
+  width: 50%;
   word-break: break-word;
+}
+
+.community-table th:nth-child(3),
+.community-table td:nth-child(3) {
+  width: 10%;
 }
 .community-table th,
 .community-table td {

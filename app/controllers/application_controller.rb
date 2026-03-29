@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
       else
         communities_path
       end
+    else
+      admins_root_path
     end
   end
   # サインアップ後のリダイレクト先
