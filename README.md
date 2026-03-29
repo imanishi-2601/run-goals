@@ -33,7 +33,6 @@
 - 日々の練習後に記録を投稿するとき
 - 自信の練習記録振り返るとき
 - 同じ目標を持つランナーの練習内容を確認したいとき
-- 大会に向けて練習計画を作成するとき
 ​
 ## 設計書
 - ワイヤーフレーム(ユーザー/User)https://drive.google.com/file/d/1n5uB0uUesP27oBAFQxwdx1IPylzQxyYg/view?usp=drive_link
