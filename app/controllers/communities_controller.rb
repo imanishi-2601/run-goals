@@ -27,11 +27,17 @@ class CommunitiesController < ApplicationController
   end
 
   def edit
-
+    @community = Community.find(params[:id])
   end
 
   def update
+    @community = Community.find(params[:id])
 
+    if @community.update(community_params)
+      redirect_to community_path(@community), notice: "コミュニティを更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
