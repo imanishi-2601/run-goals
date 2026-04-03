@@ -437,3 +437,10 @@ body {
 .posts-wrapper .community-table {
   width: 100%;
 }
+
+/* 管理者 全画面共通 */
+.admin-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+}
