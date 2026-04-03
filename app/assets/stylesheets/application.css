@@ -186,12 +186,57 @@
 /* コミュニティメンバー管理（管理者） */
 .admin-membership-table th:nth-child(1),
 .admin-membership-table td:nth-child(1) {
-  width: 70%;
+  width: 60%;
 }
 
 .admin-membership-table th:nth-child(2),
 .admin-membership-table td:nth-child(2) {
-  width: 30%;
+  width: 40%;
+  white-space: nowrap;
+}
+/* コミュニティメンバー管理（管理者）余白 */
+.community-show-wrapper {
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.community-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.community-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.community-table th,
+.community-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+}
+
+.admin-membership-wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.admin-membership-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.admin-membership-table th:nth-child(1),
+.admin-membership-table td:nth-child(1) {
+  width: 55%;
+}
+
+.admin-membership-table th:nth-child(2),
+.admin-membership-table td:nth-child(2) {
+  width: 45%;
   white-space: nowrap;
 }
 

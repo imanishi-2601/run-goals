@@ -1,31 +1,25 @@
-<h1><%= @community.name %> _メンバー管理</h1>
+<div class="admin-membership-wrapper">
+  <h1><%= @community.name %> _メンバー管理</h1>
 
-<div class="community-show-wrapper">
-  <div class="community-container">
-    <div class="container community-show">
-      <div class="row">
-        <div class="col-md-8 offset-md-1 user-right">
-          <table class="community-table admin-membership-table">
-            <thead>
-              <tr>
-                <th>ユーザー名</th>
-                <th>参加状態</th>
-              </tr>
-            </thead>
+  <table class="community-table admin-membership-table">
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+        <th>参加状態</th>
+      </tr>
+    </thead>
 
-            <tbody>
-              <% @memberships.each do |membership| %>
-                <tr>
-                  <td><%= membership.user.name %></td>
-                  <td><%= membership.status %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+    <tbody>
+      <% @memberships.each do |membership| %>
+        <tr>
+          <td><%= membership.user.name %></td>
+          <td><%= membership.approved? ? "参加中" : membership.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-          <%= link_to "コミュニティ詳細へ戻る", admins_community_path(@community) %>
-        </div>
-      </div>
-    </div>
+  <div class="mt-3">
+    <%= link_to "コミュニティ詳細へ戻る", admins_community_path(@community), class: "btn btn-outline-secondary" %>
   </div>
 </div>
