@@ -391,7 +391,43 @@ body {
   background-image: image-url("running_top.webp");
 }
 
-/*管理者*/
+/*ここから管理者関係*/
+/* 管理者 全画面共通 */
+.admin-page-container {
+  max-width: 1100px;
+  margin: 0;
+  padding: 0 16px 40px;
+}
+.admin-content-wrap {
+  padding-left: 16px;
+}
+/*管理者_タイトル位置揃え*/
+.admin-page-title-wrap {
+  margin: 16px 0;
+}
+
+.admin-page-title-wrap h1 {
+  margin: 0;
+}
+
+/* タイトルより少し右に本文を寄せる */
+.admin-content-wrap {
+  padding-left: 24px;
+}
+
+/* 検索フォーム */
+.admin-search-wrap {
+  margin-bottom: 16px;
+}
+
+/* テーブル全体 */
+.admin-table-wrap {
+  width: 100%;
+}
+
+/*管理者_コミュニティ管理*/
+
+/*管理者_ユーザー管理*/
 .admins-user-table {
   width: 100%;
   border-collapse: collapse;
@@ -438,9 +474,6 @@ body {
   width: 100%;
 }
 
-/* 管理者 全画面共通 */
-.admin-page-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px 40px;
+.admin-back-link {
+  margin-top: 12px;
 }

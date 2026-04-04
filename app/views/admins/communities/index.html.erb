@@ -1,15 +1,17 @@
 <div class="admin-page-container">
-<h1>コミュニティ管理</h1>
+  <div class="admin-page-title-wrap">
+    <h1>コミュニティ管理</h1>
+  </div>
 
-<div class="community-container">
+  <div class="admin-content-wrap">
+    <div class="admin-search-wrap">
+      <%= render "shared/search_form" %>
+    </div>
 
-  <div class="container community-show">
-    <div class="row">
-        <div class="col-md-10 offset-md-1 user-right">
-          <%= render "shared/search_form" %>
-          <%= render "shared/communities", communities: @communities,
-              detail_path: ->(community) { admins_community_path(community) } %>
+    <div class="admin-table-wrap">
+      <%= render "shared/communities",
+        communities: @communities,
+        detail_path: ->(community) { admins_community_path(community) } %>
     </div>
   </div>
-</div>
 </div>

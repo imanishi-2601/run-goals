@@ -1,36 +1,37 @@
-<h1>コミュニティ管理詳細</h1>
+<div class="admin-page-container">
+  <div class="admin-page-title-wrap">
+    <h1>コミュニティ管理詳細</h1>
+  </div>
 
-<div class="community-show-wrapper">
-  <div class="community-container">
-    <div class="row">
-        <div class="col-md-10 offset-md-1 user-right">
-          <table class="community-table admin-community-table">
-            <thead>
-            <tr>
-              <th>コミュニティ名</th>
-              <th>コミュニティ紹介</th>
-              <th>メンバー一覧</th>
-              <th>投稿一覧</th>
-              <th>操作</th>
-            </tr>
-            </thead>
+  <div class="admin-content-wrap">
+    <div class="admin-table-wrap">
+      <table class="community-table admin-community-table">
+        <thead>
+        <tr>
+          <th>コミュニティ名</th>
+          <th>コミュニティ紹介</th>
+          <th>メンバー一覧</th>
+          <th>投稿一覧</th>
+          <th>操作</th>
+        </tr>
+        </thead>
 
-            <tbody>
-                  <tr>
-                    <td><%= @community.name %></td>
-                    <td><%= @community.introduction %></td>
-                    <td><%= link_to "メンバー", admins_community_community_memberships_path(@community) %></td>
-                    <td><%= link_to "投稿", admins_community_posts_path(@community) %></td>
-                    <td><%= link_to "削除",
-                          admins_community_path(@community),
-                          data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}
-                    %></td>
-                  </tr>
-            </tbody>
-
-          </table>
-          <%= link_to "一覧に戻る", admins_communities_path %>
-        </div>
+        <tbody>
+          <tr>
+            <td><%= @community.name %></td>
+            <td><%= @community.introduction %></td>
+            <td><%= link_to "メンバー", admins_community_community_memberships_path(@community) %></td>
+            <td><%= link_to "投稿", admins_community_posts_path(@community) %></td>
+            <td><%= link_to "削除",
+                  admins_community_path(@community),
+                    data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}
+                %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="admin-back-link">
+        <%= link_to "一覧に戻る", admins_communities_path %>
       </div>
     </div>
   </div>
+</div>
