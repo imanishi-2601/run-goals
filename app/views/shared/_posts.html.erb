@@ -1,3 +1,4 @@
+<% admin = local_assigns[:admin] %>
         <div>
         <div class="post-container">
           <table class="post-table">
@@ -8,7 +9,10 @@
               <th>距離[km]</th>
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
-              <th></th>
+              <%# 管理者以外は詳細リンクを表示 %>
+              <% unless admin %>
+                <th></th>
+              <% end %>
             </tr>
             </thead>
 
@@ -21,15 +25,17 @@
                 <td><%= post.distance %></td>
                 <td><%= post.formatted_time %></td>
                 <td><%= post.formatted_pace %></td>
-                <td>
-                  <%= link_to "詳細", post_path(post) %>
-                </td>
+                <% unless admin %>
+                  <td>
+                    <%= link_to "詳細", post_path(post) %>
+                  </td>
+                <% end %>
               </tr>
               <% end %>
 
               <% else %>
                 <tr>
-                  <td colspan="6">投稿がまだありません</td>
+                  <td colspan="<%= admin ? 5 : 6 %>">投稿がまだありません</td>
                 </tr>
               <% end %>
 

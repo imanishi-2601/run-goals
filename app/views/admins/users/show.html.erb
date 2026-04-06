@@ -1,23 +1,25 @@
-<h1>ユーザー管理詳細</h1>
+<div class="admin-page-container">
+  <div class="admin-page-title-wrap">
+    <h1>ユーザー管理詳細</h1>
+  </div>
 
-<div class="col-md-10 offset-md-1">
-  <table class="admins-user-table">
-    <thead>
-      <tr>
-        <th>ユーザーid</th>
-        <th>ユーザー名</th>
-        <th>メールアドレス</th>
-        <th>ステータス</th>
-        <th>権限</th>
-        <th>投稿数</th>
-        <th>コミュニティ参加数</th>
-        <th>登録日</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-
-    <tbody>
-
+  <div class="admin-content-wrap">
+    <div class="admin-table-wrap">
+      <table class="admins-user-table">
+        <thead>
+          <tr>
+            <th>ユーザーid</th>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+            <th>権限</th>
+            <th>投稿数</th>
+            <th>コミュニティ参加数</th>
+            <th>登録日</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             <td><%= @user.id %></td>
             <td><%= @user.name %></td>
@@ -28,46 +30,44 @@
             <td><%= @user.communities.count %></td>
             <td><%= @user.created_at.strftime("%Y/%m/%d") %></td>
             <td>
-  <% if !@user.admin? && current_user != @user %>
-    <% if @user.is_active %>
-      <%= link_to "利用停止",
-        admins_user_path(@user),
-        class: "btn btn-danger btn-sm",
-        data: {
-          turbo_method: :patch,
-          turbo_confirm: "ユーザーID: #{@user.id} / ユーザー名: #{@user.name} を利用停止にしますか？"
-        } %>
-
-      <%= link_to "退会",
-        "#",
-        class: "btn btn-secondary btn-sm disabled",
-        title: "退会は利用停止中のユーザーのみ可能です" %>
-
-    <% else %>
-      <%= link_to "利用再開",
-        admins_user_path(@user),
-        class: "btn btn-primary btn-sm",
-        data: {
-          turbo_method: :patch,
-          turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）の利用を再開しますか？"
-        } %>
-
-      <%= link_to "退会",
-        admins_user_path(@user),
-        class: "btn btn-danger btn-sm me-1",
-        data: {
-          turbo_method: :delete,
-          turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）を退会処理しますか？この操作は取り消せません。"
-        } %>
-    <% end %>
-  <% else %>
-    -
-  <% end %>
-</td>
+              <%# 管理者ではない、かつ自分ではないユーザーに対してのみ操作ボタンを表示 %>
+              <% if !@user.admin? && current_user != @user %>
+                <% if @user.is_active %>
+                  <%= link_to "利用停止",
+                    admins_user_path(@user),
+                    class: "btn btn-danger btn-sm",
+                    data: {
+                      turbo_method: :patch,
+                      turbo_confirm: "ユーザーID: #{@user.id} / ユーザー名: #{@user.name} を利用停止にしますか？"
+                    } %>
+                  <%= link_to "退会","#",
+                    class: "btn btn-secondary btn-sm disabled",
+                    title: "退会は利用停止中のユーザーのみ可能です" %>
+                <% else %>
+                  <%= link_to "利用再開",
+                    admins_user_path(@user),
+                    class: "btn btn-primary btn-sm",
+                    data: {
+                      turbo_method: :patch,
+                      turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）の利用を再開しますか？"
+                    } %>
+                  <%= link_to "退会",
+                    admins_user_path(@user),
+                    class: "btn btn-danger btn-sm me-1",
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "ユーザーID: #{@user.id}（#{@user.name}）を退会処理しますか？この操作は取り消せません。"
+                    } %>
+                <% end %>
+              <% else %>
+                <%# 管理者、または自分のユーザーに対しては操作不可のため、"-"を表示 %>
+                -
+              <% end %>
+            </td>
           </tr>
-
-    </tbody>
-  </table>
-
-  <%= link_to "一覧へ戻る", admins_users_path %>
+        </tbody>
+      </table>
+      <%= link_to "一覧へ戻る", admins_users_path %>
+    </div>
+  </div>
 </div>
