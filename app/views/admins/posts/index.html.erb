@@ -1,11 +1,15 @@
-<h1>投稿管理</h1>
+<div class="admin-page-container">
+  <div class="admin-page-title-wrap">
+    <h1>投稿管理</h1>
+  </div>
 
-<div class="posts-wrapper">
-  <%= render "shared/posts", posts: @posts %>
+  <div class="admin-content-wrap admin-posts-wrapper">
+    <%= render "shared/posts", posts: @posts, admin: true %>
 
-  <div class="mt-3">
-    <%= link_to "コミュニティ詳細へ戻る",
+    <div class="mt-3">
+      <%= link_to "コミュニティ詳細へ戻る",
         admins_community_path(@community),
         class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 </div>

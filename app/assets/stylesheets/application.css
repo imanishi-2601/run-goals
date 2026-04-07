@@ -444,24 +444,24 @@ body {
 
 /* 管理者 メンバー管理画面_追加 */
 .admin-membership-wrapper {
-  width: 70% !important;
-  margin: 0 auto !important;
+  max-width: 700px;
+  margin: 0;
 }
 
 .admin-membership-wrapper .admin-membership-table {
-  width: 100% !important;
-  table-layout: fixed !important;
+  width: 600px;
+  table-layout;
 }
 
 .admin-membership-wrapper .admin-membership-table th:nth-child(1),
 .admin-membership-wrapper .admin-membership-table td:nth-child(1) {
-  width: 55% !important;
+  width: 55%;
 }
 
 .admin-membership-wrapper .admin-membership-table th:nth-child(2),
 .admin-membership-wrapper .admin-membership-table td:nth-child(2) {
-  width: 45% !important;
-  white-space: nowrap !important;
+  width: 45%;
+  white-space: nowrap;
 }
 
 /* 管理者 投稿管理画面_追加 */
@@ -476,4 +476,9 @@ body {
 
 .admin-back-link {
   margin-top: 12px;
+}
+
+.admin-posts-wrapper .post-container {
+  max-width: 100%;
+  margin: 0;
 }
