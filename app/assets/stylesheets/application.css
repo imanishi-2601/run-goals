@@ -154,6 +154,45 @@
   width: 100%;
 }
 
+/* コミュニティメンバー一覧（ユーザー） */
+.member-index-page {
+  padding-left: 8px;
+}
+.member-index-page .community-table {
+  width: 80%;
+  table-layout: fixed;
+}
+
+.member-index-page .community-table th:nth-child(1),
+.member-index-page .community-table td:nth-child(1) {
+  width: 35%;
+}
+
+.member-index-page .community-table th:nth-child(2),
+.member-index-page .community-table td:nth-child(2) {
+  width: 25%;
+}
+
+.member-index-page .community-table th:nth-child(3),
+.member-index-page .community-table td:nth-child(3) {
+  width: 40%;
+}
+
+.member-index-page .community-table td {
+  word-break: break-word;
+}
+
+.member-index-page .community-table td form {
+  margin: 0;
+}
+
+.member-index-page .community-table td input[type="submit"] {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 14px;
+  white-space: normal;
+}
+
 /* コミュニティ一覧（管理者） */
 .admin-community-table th:nth-child(1),
 .admin-community-table td:nth-child(1) {

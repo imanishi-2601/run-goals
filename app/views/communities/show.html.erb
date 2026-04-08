@@ -41,8 +41,15 @@
         </tr>
       </tbody>
     </table>
-    <%= link_to "編集", edit_community_path(@community), class: "btn btn-primary px-4"
- %>
+    <!-- コミュニティの編集リンク(作成者のみ表示) -->
+    <% if @community.user == current_user %>
+      <%= link_to "編集", edit_community_path(@community), class: "btn btn-primary px-4" %>
+      <%= link_to "削除",
+      community_path(@community),
+      data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+      class: "btn btn-danger" %>
+    <% end %>
+    <br>
     <%= link_to "一覧に戻る", communities_path, class: "btn btn-outline-secondary" %>
     <br>
     <% if @community.user == current_user %>

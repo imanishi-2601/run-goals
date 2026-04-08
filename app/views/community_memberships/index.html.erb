@@ -1,43 +1,44 @@
 <h1><%= @community.name %> _メンバー一覧</h1>
 
 <div class="community-container">
-          <table class="community-table">
-  <thead>
-    <tr>
-      <th>ユーザー名</th>
-      <th>参加状態</th>
-
-      <% if @community.user_id == current_user.id %>
-        <th>操作</th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @memberships.each do |membership| %>
+  <div class="community-container member-index-page">
+    <table class="community-table">
+    <thead>
       <tr>
-        <td><%= membership.user.name %></td>
-        <td><%= membership.approved? ? "参加中" : membership.status %></td>
-          <% if @community.user_id == current_user.id %>
-            <td>
-              <% if membership.user_id == @community.user_id %>
-                現管理者
-              <% elsif @community.pending_owner_id == membership.user_id %>
-                依頼中
-              <% elsif membership.approved? %>
-                <%= button_to "管理者変更を依頼",
+        <th>ユーザー名</th>
+        <th>参加状態</th>
+
+        <% if @community.user_id == current_user.id %>
+          <th>操作</th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @memberships.each do |membership| %>
+        <tr>
+          <td><%= membership.user.name %></td>
+          <td><%= membership.approved? ? "参加中" : membership.status %></td>
+            <% if @community.user_id == current_user.id %>
+              <td>
+                <% if membership.user_id == @community.user_id %>
+                  現管理者
+                <% elsif @community.pending_owner_id == membership.user_id %>
+                  依頼中
+                <% elsif membership.approved? %>
+                  <%= button_to "管理者変更を依頼",
                     request_owner_transfer_community_path(@community, new_owner_id: membership.user_id),
                     method: :patch,
                     data: { turbo_confirm: "#{membership.user.name}さんに管理者変更を依頼しますか？" } %>
-              <% else %>
-                -
-              <% end %>
-            </td>
-          <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "コミュニティ詳細へ戻る", community_path(@community) %>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    <%= link_to "コミュニティ詳細へ戻る", community_path(@community) %>
+  </div>
 </div>

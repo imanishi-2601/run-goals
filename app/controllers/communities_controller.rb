@@ -1,12 +1,16 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
+  # コミュニティの各アクションの前にコミュニティをセット
+  before_action :set_community, only: [:show, :edit, :update, :destroy,
+                                       :request_owner_transfer, :accept_owner_transfer, :reject_owner_transfer]
+  # コミュニティの編集、更新、削除、管理者移行依頼は作成者のみ可能
+  before_action :ensure_owner!, only: [:edit, :update, :destroy, :request_owner_transfer]
 
   def index
     @communities = Community.all
   end
 
   def show
-    @community = Community.find(params[:id])
     @community_membership = current_user.community_membership.find_by(community: @community)
   end
 
@@ -27,12 +31,9 @@ class CommunitiesController < ApplicationController
   end
 
   def edit
-    @community = Community.find(params[:id])
   end
 
   def update
-    @community = Community.find(params[:id])
-
     if @community.update(community_params)
       redirect_to community_path(@community), notice: "コミュニティを更新しました。"
     else
@@ -41,7 +42,8 @@ class CommunitiesController < ApplicationController
   end
 
   def destroy
-
+    @community.destroy
+    redirect_to communities_path, notice: "コミュニティを削除しました。"
   end
 
   def search
@@ -116,7 +118,13 @@ class CommunitiesController < ApplicationController
   end
 
 private
-
+  def set_community
+    @community = Community.find(params[:id])
+  end
+  def ensure_owner!
+    return if @community.user_id == current_user.id
+    redirect_to community_path(@community), alert: "権限がありません"
+  end
   def community_params
     params.require(:community).permit(:name, :introduction)
   end
