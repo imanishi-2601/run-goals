@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  # 投稿の各アクションの前に投稿をセット(set_postを実行)
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # 投稿の編集、更新、削除時に投稿者であることを確認
+  before_action :ensure_post_owner, only: [:edit, :update, :destroy]
+
   def index
     if params[:community_id].present?
       @community = Community.find(params[:community_id])
@@ -14,7 +19,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -40,7 +44,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = current_user.posts.find(params[:id])
   end
 
   def update
@@ -50,7 +53,6 @@ class PostsController < ApplicationController
       params[:sec].to_i
     )
 
-    @post = current_user.posts.find(params[:id])
     @post.time = total_sec
 
     if @post.update(post_params)
@@ -61,12 +63,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
+    @post.destroy
     redirect_to posts_path, notice: "投稿を削除しました"
   end
 
-    private
+  private
 
   def post_params
     params.require(:post).permit(
@@ -78,5 +79,16 @@ class PostsController < ApplicationController
       :is_public,
       :community_id
     )
+  end
+
+  # 投稿を@postにセットするメソッド(各アクション前の動作)
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  # 投稿を@postにセットするメソッド
+  def ensure_post_owner
+    unless @post.user_id == current_user.id
+      redirect_to posts_path, alert: "権限がありません。"
+    end
   end
 end
