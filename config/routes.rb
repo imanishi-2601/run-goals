@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
   root "homes#top"
-  get "community_memberships/index"
-  get "community_memberships/create"
-  get "community_memberships/update"
-  get "community_memberships/destroy"
-  get "posts/index"
-  get "posts/show"
-  post "posts/new" => "posts#create"  # データを追加（保存）するため
-  get "posts/edit"
-
 
   # =========================================================
   # ユーザー
@@ -21,10 +12,6 @@ Rails.application.routes.draw do
 
   # コミュニティ
   resources :communities do
-    collection do
-      get :search
-    end
-
     resources :community_memberships, only: [:index, :create, :update, :destroy]
     resources :posts
     # 管理者移行用のルート
@@ -35,7 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:show, :edit, :update, :destroy]
   get "search", to: "search#index"
 
   # マイページ
@@ -43,10 +29,6 @@ Rails.application.routes.draw do
 
   # 全投稿一覧用
   resources :posts
-  # コミュニティ別投稿一覧用
-  resources :communities do
-    resources :posts, only: [:index]
-  end
 
   # =========================================================
   # 管理者
@@ -62,8 +44,6 @@ Rails.application.routes.draw do
       resources :community_memberships, only: [:index, :create, :update, :destroy]
       resources :posts, only: [:index]
     end
-    resources :communities
-    resources :communities, only: [:index, :show, :update, :destroy]
     resources :posts, only: [:index]
     resources :users
   end

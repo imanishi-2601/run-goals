@@ -1,15 +1,42 @@
 class SearchController < ApplicationController
-  def index
-    @keyword = params[:keyword]
+  before_action :authenticate_user!
 
-    # 未入力検索時のエラーメッセージ表示
+  def index
+    @keyword = params[:keyword].to_s.strip
+    @match   = params[:match].presence || "partial"
+    @scope   = params[:scope].presence || "communities"
+
+    @communities = Community.none
+
     if @keyword.blank?
       flash.now[:alert] = "キーワードを入力してください"
-      @communities = []
       return
     end
 
-    @communities = Community.where("name LIKE ?", "%#{@keyword}%")
+    pattern = build_pattern(@keyword, @match)
 
+    if @scope == "communities"
+      @communities = Community.where(
+        "name LIKE :pattern OR introduction LIKE :pattern",
+        pattern: pattern
+      )
+    end
+  end
+
+  private
+
+  def build_pattern(raw_keyword, match)
+    escaped_keyword = ActiveRecord::Base.sanitize_sql_like(raw_keyword)
+
+    case match
+    when "exact"
+      escaped_keyword
+    when "prefix"
+      "#{escaped_keyword}%"
+    when "suffix"
+      "%#{escaped_keyword}"
+    else
+      "%#{escaped_keyword}%"
+    end
   end
 end
