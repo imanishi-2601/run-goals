@@ -46,20 +46,6 @@ class CommunitiesController < ApplicationController
     redirect_to communities_path, notice: "コミュニティを削除しました。"
   end
 
-  def search
-    if params[:keyword].present?
-      @communities = Community.where(
-        "name LIKE ? OR introduction LIKE ?",
-        "%#{params[:keyword]}%",
-        "%#{params[:keyword]}%"
-      )
-    else
-      @communities = Community.none
-      flash.now[:alert] = "キーワードを入力してください"
-      render :index
-   end
-  end
-
     # 管理者移行依頼のアクション
   def request_owner_transfer
     @community = Community.find(params[:id])
