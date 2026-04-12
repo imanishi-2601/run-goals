@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order(created_at: :desc)
+    # 投稿時に入力した日付で並ぶ/同じ日付なら投稿作成が新しい方を上にする
+    @posts = current_user.posts.order(date: :desc, created_at: :desc)
 
     # ユーザーが作成したコミュニティの保留中の参加申請を取得
     @pending_memberships = CommunityMembership

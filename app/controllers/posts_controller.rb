@@ -9,12 +9,14 @@ class PostsController < ApplicationController
     if params[:community_id].present?
       @community = Community.find(params[:community_id])
 
+      # コミュニティに所属しているユーザーの投稿のみを表示
+      # 投稿時に入力した日付で並ぶ/同じ日付なら投稿作成が新しい方を上にする
       @posts = Post.includes(:user, :community)
                  .where(community_id: @community.id)
-                 .order(created_at: :desc)
+                 .order(date: :desc, created_at: :desc)
     else
       @posts = Post.includes(:user, :community)
-                 .order(created_at: :desc)
+                 .order(date: :desc, created_at: :desc)
     end
   end
 

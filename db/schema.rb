@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_29_040401) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_12_070946) do
   create_table "communities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_29_040401) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.boolean "admin", default: false, null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "withdrawn_at"
