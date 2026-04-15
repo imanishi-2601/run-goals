@@ -15,12 +15,17 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
+      community: コミュニティ
     attributes:
       user:
         name: ユーザー名
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
+
+      community:
+        name: コミュニティ名
+        introduction: コミュニティ紹介
 
   errors:
     format: "%{attribute}%{message}"

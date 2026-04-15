@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   validates :date, presence: true
   validates :distance, presence: true
   validates :time, presence: true
+  # コミュニティIDは必須
+  validates :community_id, presence: true
 
   def self.to_sec(hour, min, sec)
     hour_to_sec = hour * 60 * 60

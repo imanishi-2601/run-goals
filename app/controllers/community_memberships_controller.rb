@@ -6,6 +6,11 @@ class CommunityMembershipsController < ApplicationController
     @memberships = @community.community_memberships.approved
     @pending_memberships = @community.community_memberships.pending
     @approved_memberships = @community.community_memberships.approved
+    # コミュニティに参加していない場合は閲覧不可
+    unless current_user.community_memberships.exists?(community_id: @community.id, status: :approved)
+      redirect_to community_path(@community), alert: "メンバー一覧を見るにはコミュニティ参加が必要です。"
+      return
+    end
   end
 
   def show

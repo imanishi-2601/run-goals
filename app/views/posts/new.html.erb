@@ -35,8 +35,12 @@
       </div>
     </div>
     <div class="post-column">
-      <div class="post-label">対象コミュニティ</div>
-      <%= f.collection_select :community_id, current_user.joined_communities, :id, :name, { prompt: "コミュニティを選択" }, { class: "post-input" } %>
+      <div class="post-label">対象コミュニティ <span class="text-danger">*</span></div>
+      <%= f.collection_select :community_id,
+          current_user.joined_communities,
+          :id,
+          :name,
+          { prompt: "コミュニティを選択" }, { class: "post-input"} %>
     </div>
     <div class="post-column memo-column">
       <div class="post-label">メモ/感想</div>

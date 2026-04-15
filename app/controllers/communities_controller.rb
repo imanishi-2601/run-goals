@@ -24,7 +24,7 @@ class CommunitiesController < ApplicationController
 
     if @community.save
       @community.community_memberships.create(user: current_user, status: :approved)
-      redirect_to communities_path
+      redirect_to communities_path, notice: "コミュニティを作成しました"
     else
       render :new, status: :unprocessable_entity
     end

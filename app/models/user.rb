@@ -10,8 +10,11 @@ class User < ApplicationRecord
   has_many :community_membership, dependent: :destroy
   has_many :joined_communities, through: :community_membership, source: :community
 
-  has_many :community_memberships, dependent: :destroy
-  has_many :joined_communities, through: :community_memberships, source: :community
+  has_many :community_memberships
+  # コミュニティに参加しているかどうかを確認するメソッド
+  def joined_community?(community)
+    community_memberships.exists?(community_id: community.id, status: :approved)
+  end
 
   has_many :posts
 

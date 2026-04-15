@@ -6,11 +6,15 @@
 
 <div>
   <div class="post-container">
+    <div class="alert alert-warning">
+      このコミュニティの投稿は一部のみ表示しています（全件閲覧には参加が必要です）。
+        <%= link_to "コミュニティに参加する", community_path(@community), class: "btn btn-sm btn-primary ms-2" %>
+    </div>
     <table class="post-table">
       <thead>
         <tr>
           <th class="col-date">日付</th>
-          <th class="col-name">名前</th>
+          <th class="col-name">ユーザー名</th>
           <th class="col-distance">距離[km]</th>
           <th class="col-time">時間[時:分:秒]</th>
           <th class="col-pace">ペース[分:秒/km]</th>
