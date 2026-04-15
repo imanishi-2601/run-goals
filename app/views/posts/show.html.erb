@@ -8,6 +8,12 @@
         <tr>
           <th class="col-date">日付</th>
           <th class="col-name">ユーザー名</th>
+
+          <!-- 全投稿一覧の場合のみコミュニティ名を表示 -->
+          <% unless @community.present? %>
+            <th class="col-community">コミュニティ</th>
+          <% end %>
+
           <th class="col-distance">距離[km]</th>
           <th class="col-time">時間[時:分:秒]</th>
           <th class="col-pace">ペース[分:秒/km]</th>
@@ -24,6 +30,16 @@
         <tr>
           <td class="col-date"><%= @post.date %></td>
           <td class="col-name"><%= link_to @post.user.name, user_path(@post.user) %></td>
+
+          <!-- 全投稿一覧の場合のみコミュニティ名を表示 -->
+          <td class="col-community">
+            <% if @post.community.present? %>
+              <%= link_to @post.community.name, community_path(@post.community) %>
+            <% else %>
+              <span class="text-muted">未所属</span>
+            <% end %>
+          </td>
+
           <td class="col-distance"><%= @post.distance %></td>
           <td class="col-time"><%= @post.formatted_time %></td>
           <td class="col-pace"><%= @post.formatted_pace %></td>

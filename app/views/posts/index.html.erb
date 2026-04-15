@@ -6,28 +6,67 @@
 
 <div>
   <div class="post-container">
-    <div class="alert alert-warning">
-      このコミュニティの投稿は一部のみ表示しています（全件閲覧には参加が必要です）。
-        <%= link_to "コミュニティに参加する", community_path(@community), class: "btn btn-sm btn-primary ms-2" %>
-    </div>
-    <table class="post-table">
-      <thead>
-        <tr>
-          <th class="col-date">日付</th>
-          <th class="col-name">ユーザー名</th>
-          <th class="col-distance">距離[km]</th>
-          <th class="col-time">時間[時:分:秒]</th>
-          <th class="col-pace">ペース[分:秒/km]</th>
-          <th class="col-action"></th>
-        </tr>
-      </thead>
-
-      <tbody>
+    <% if @community.present? %>
+      <% if @limited_posts %>
         <% if @posts.any? %>
+          <div class="alert alert-warning">
+            このコミュニティの投稿は一部のみ表示しています。全件を見るには参加が必要です。
+            <div class="mt-2">
+              <%= link_to "コミュニティに参加する", community_path(@community), class: "btn btn-sm btn-primary" %>
+            </div>
+          </div>
+        <% else %>
+          <div class="alert alert-warning">
+            このコミュニティの投稿は参加すると閲覧できます。
+            <div class="mt-2">
+              <%= link_to "コミュニティに参加する", community_path(@community), class: "btn btn-sm btn-primary" %>
+            </div>
+          </div>
+          <p>現在表示できる投稿はありません。</p>
+        <% end %>
+      <% elsif @posts.empty? %>
+        <p>このコミュニティには投稿がまだありません。</p>
+      <% end %>
+    <% elsif @posts.empty? %>
+      <p>投稿がまだありません。</p>
+    <% end %>
+
+    <% if @posts.any? %>
+      <table class="post-table">
+        <thead>
+          <tr>
+            <th class="col-date">日付</th>
+            <th class="col-name">ユーザー名</th>
+
+            <!-- 全投稿一覧の場合のみコミュニティ名を表示 -->
+            <% unless @community.present? %>
+              <th class="col-community">コミュニティ</th>
+            <% end %>
+
+            <th class="col-distance">距離[km]</th>
+            <th class="col-time">時間[時:分:秒]</th>
+            <th class="col-pace">ペース[分:秒/km]</th>
+            <th class="col-action"></th>
+          </tr>
+        </thead>
+
+        <tbody>
           <% @posts.each do |post| %>
             <tr>
               <td class="col-date"><%= post.date %></td>
               <td class="col-name"><%= post.user.name %></td>
+
+              <!-- 全投稿一覧の場合のみコミュニティ名を表示 -->
+              <% unless @community.present? %>
+                <td class="col-community">
+                  <% if post.community.present? %>
+                    <%= link_to post.community.name, community_path(post.community) %>
+                  <% else %>
+                    <span class="text-muted">未所属</span>
+                  <% end %>
+                </td>
+              <% end %>
+
               <td class="col-distance"><%= post.distance %></td>
               <td class="col-time"><%= post.formatted_time %></td>
               <td class="col-pace"><%= post.formatted_pace %></td>
@@ -36,15 +75,10 @@
               </td>
             </tr>
           <% end %>
+        </tbody>
+      </table>
+    <% end %>
 
-        <% else %>
-          <tr>
-            <td colspan="6">投稿がまだありません</td>
-          </tr>
-        <% end %>
-
-      </tbody>
-    </table>
     <br>
     <% if @community.present? %>
       <%= link_to "コミュニティ詳細へ戻る", community_path(@community), class: "btn-common" %>

@@ -19,23 +19,23 @@
       <tr>
         <th class="bg-light">参加コミュニティ</th>
         <td>
-        <% if @user.joined_communities.any? %>
-          <% @user.joined_communities.each do |community| %>
-            <%= link_to community.name, community_path(community) %><br>
-          <% end %>
-        <% else %>
+          <% if @user.joined_communities.any? %>
+            <% @user.joined_communities.each do |community| %>
+              <%= link_to community.name, community_path(community) %><br>
+            <% end %>
+          <% else %>
             なし
-        <% end %>
+          <% end %>
         </td>
       </tr>
       <% if @user.communities.any? %>
         <tr>
           <td>オーナーコミュニティ</td>
           <td>
-          <% @user.communities.each do |community| %>
-            <%= link_to community.name, community_path(community) %>(<%= community.community_memberships.approved.count %>)
-            (<%= community.community_memberships.pending.count %>)<br>
-          <% end %>
+            <% @user.communities.each do |community| %>
+              <%= link_to community.name, community_path(community) %>(<%= community.community_memberships.approved.count %>)
+              (<%= community.community_memberships.pending.count %>)<br>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -58,6 +58,7 @@
   <div class="mypage-right">
     <% if @user.communities.any? %>
       <p>参加申請の承認待ち</p>
+
       <% if @pending_memberships.any? %>
         <table class="user-table-right">
           <thead>
@@ -98,44 +99,46 @@
 </div>
 
 <br>
-  <div class="post-container">
+<div class="post-container">
   <h3>投稿一覧</h3>
-          <table class="post-table">
-            <thead>
+    <% if @posts.any? %>
+      <table class="post-table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>名前</th>
+            <th>コミュニティ</th>
+            <th>距離[km]</th>
+            <th>時間[時:分:秒]</th>
+            <th>ペース[分:秒/km]</th>
+            <% if @posts.any? %>
+              <th></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @posts.any? %>
+            <% @posts.each do |post| %>
             <tr>
-              <th>日付</th>
-              <th>名前</th>
-              <th>コミュニティ</th>
-              <th>距離[km]</th>
-              <th>時間[時:分:秒]</th>
-              <th>ペース[分:秒/km]</th>
-              <% if @posts.any? %>
-                <th></th>
-              <% end %>
+              <td><%= post.date %></td>
+              <td><%= post.user.name %></td>
+              <td><%= post.community&.name || "未設定" %></td>
+              <td><%= post.distance %></td>
+              <td><%= post.formatted_time %></td>
+              <td><%= post.formatted_pace %></td>
+              <td>
+                <%= link_to "詳細", post_path(post) %>
+              </td>
             </tr>
-            </thead>
-
-            <tbody>
-              <% if @posts.any? %>
-                <% @posts.each do |post| %>
-                <tr>
-                  <td><%= post.date %></td>
-                  <td><%= post.user.name %></td>
-                  <td><%= post.community&.name || "未設定" %></td>
-                  <td><%= post.distance %></td>
-                  <td><%= post.formatted_time %></td>
-                  <td><%= post.formatted_pace %></td>
-                  <td>
-                    <%= link_to "詳細", post_path(post) %>
-                  </td>
-                </tr>
-                <% end %>
-              <% else %>
-                <tr>
-                  <td colspan="6">投稿がまだありません</td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="6">投稿がまだありません</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>まだ投稿がありません。</p>
+    <% end %>
+</div>
