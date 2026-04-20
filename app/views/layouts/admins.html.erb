@@ -24,11 +24,16 @@
   </head>
 
   <body>
-    <%= render "admins/header" %>
-      <!--変数を上記に追加、例_'--'post_images: @post_images-->
-    <% if notice %>
-      <div class="alert alert-success"><%= notice %></div>
-    <% end %>
-    <%= yield %>
+
+      <%= render "admins/header" %>
+        <!--変数を上記に追加、例_'--'post_images: @post_images-->
+      <% if notice %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end %>
+      <main class="main-content">
+        <%= yield %>
+      </main>
+      <%= render "shared/footer" %>
+
   </body>
 </html>

@@ -10,7 +10,7 @@
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
               <%# 管理者以外は詳細リンクを表示 %>
-              <% unless admin %>
+              <% if !admin && show_detail %>
                 <th></th>
               <% end %>
             </tr>
@@ -25,7 +25,7 @@
                 <td><%= post.distance %></td>
                 <td><%= post.formatted_time %></td>
                 <td><%= post.formatted_pace %></td>
-                <% unless admin %>
+                <% if !admin && show_detail %>
                   <td>
                     <%= link_to "詳細", post_path(post) %>
                   </td>

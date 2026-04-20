@@ -14,6 +14,29 @@
   display: flex;
 }
 
+html, body {
+  height: 100%;
+}
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.signup-callout {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.signup-callout p {
+  margin-bottom: 16px;
+}
+
 /* 新規会員登録（ユーザー） */
 .signup-wrapper {
   width: 400px;
@@ -419,15 +442,49 @@
   width: 70px;
 }
 /*新規投稿ここまで*/
+.top-content {
+  max-width: 900px;     /* 横幅制限（読みやすさUP） */
+  padding: 0 20px;      /* 左右余白（詰まり防止） */
+}
+.top-content ul {
+  font-size: 16px;
+  padding-left: 36px;
+}
+
+.top-content li {
+  margin-bottom: 6px;
+}
+.top-content h2 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
 
 .top-image {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
+  margin-bottom: 24px;
 }
 
 body {
   background-image: image-url("running_top.webp");
+}
+
+/* フッター(ユーザー) */
+.footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #777;
 }
 
 /*ここから管理者関係*/
