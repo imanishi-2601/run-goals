@@ -30,6 +30,7 @@ ja:
       post:
         date: 日付
         distance: 距離
+        time: 時間
         community_id: 対象コミュニティ
         memo: メモ・感想
 
