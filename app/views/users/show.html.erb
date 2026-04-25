@@ -3,7 +3,7 @@
 <% else %>
   <h1>ユーザー詳細</h1>
 <% end %>
-
+<div class="page-content">
 <!-- 左：プロフィール -->
 <div class="mypage-container">
   <div class="mypage-left">
@@ -99,46 +99,48 @@
 </div>
 
 <br>
-<div class="post-container">
-  <h3>投稿一覧</h3>
-    <% if @posts.any? %>
-      <table class="post-table">
-        <thead>
-          <tr>
-            <th>日付</th>
-            <th>名前</th>
-            <th>コミュニティ</th>
-            <th>距離[km]</th>
-            <th>時間[時:分:秒]</th>
-            <th>ペース[分:秒/km]</th>
+
+  <div class="post-container">
+    <h3>投稿一覧</h3>
+      <% if @posts.any? %>
+        <table class="post-table">
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>名前</th>
+              <th>コミュニティ</th>
+              <th>距離[km]</th>
+              <th>時間[時:分:秒]</th>
+              <th>ペース[分:秒/km]</th>
+              <% if @posts.any? %>
+                <th></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
             <% if @posts.any? %>
-              <th></th>
+              <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.date %></td>
+                <td><%= post.user.name %></td>
+                <td><%= post.community&.name || "未設定" %></td>
+                <td><%= post.distance %></td>
+                <td><%= post.formatted_time %></td>
+                <td><%= post.formatted_pace %></td>
+                <td>
+                  <%= link_to "詳細", post_path(post) %>
+                </td>
+              </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="6">投稿がまだありません</td>
+              </tr>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% if @posts.any? %>
-            <% @posts.each do |post| %>
-            <tr>
-              <td><%= post.date %></td>
-              <td><%= post.user.name %></td>
-              <td><%= post.community&.name || "未設定" %></td>
-              <td><%= post.distance %></td>
-              <td><%= post.formatted_time %></td>
-              <td><%= post.formatted_pace %></td>
-              <td>
-                <%= link_to "詳細", post_path(post) %>
-              </td>
-            </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="6">投稿がまだありません</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p>まだ投稿がありません。</p>
-    <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>まだ投稿がありません。</p>
+      <% end %>
+  </div>
 </div>

@@ -59,7 +59,7 @@ html, body {
 .mypage-container {
   display: flex;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0;
 }
 .mypage-left {
   width: 35%;
@@ -105,7 +105,7 @@ html, body {
 .community-container {
   width: 100%;
   max-width: none;
-  margin: 0 auto;
+  margin: 0;
 }
 /* 1列目 コミュニティ名 */
 .community-table th:nth-child(1),
@@ -336,6 +336,18 @@ html, body {
   align-items: center;
   padding: 0;
 }
+/* select 用 */
+.post-select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 16px;
+  background: transparent;
+}
+
 /* 親枠いっぱいに広げる */
 .post-input input {
   width: 100%;
@@ -364,10 +376,23 @@ html, body {
   width: 100%;
 }
 
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.post-list-container {
+  max-width: 1100px;
+  margin-left: 0;
+  margin-right: auto;
+}
 .post-container {
   max-width: 1000px;
-  margin: 0 auto;
 }
+.post-column.memo-column {
+  flex: 1.5;
+}
+
 .post-table {
   border-collapse: collapse;
   width: 100%;
@@ -377,6 +402,9 @@ html, body {
 .post-table td {
   border: 1px solid #ccc;
   padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .post-table .col-date {
   width: 110px;
@@ -470,6 +498,27 @@ html, body {
 
 body {
   background-image: image-url("running_top.webp");
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0;
+  padding: 0 24px;
+}
+
+/* 検索機能(ユーザー) *//* エラー文用 */
+.search-error-box {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid #dc3545;
+  background-color: #f8d7da;
+  color: #842029;
+  border-radius: 6px;
+}
+
+.search-error-title {
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
 /* フッター(ユーザー) */

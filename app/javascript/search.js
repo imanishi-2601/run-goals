@@ -4,10 +4,11 @@ document.addEventListener("turbo:load", function () {
   const form = document.getElementById("search-form");
   const input = document.getElementById("search-keyword");
   const error = document.getElementById("search-error");
+  const errorBox = document.getElementById("search-error-box");
 
-  console.log(form, input, error);
+  console.log(form, input, error, errorBox);
 
-  if (!form || !input || !error) return;
+  if (!form || !input || !error || !errorBox) return;
 
   if (form.dataset.searchBound === "true") return;
   form.dataset.searchBound = "true";
@@ -19,8 +20,10 @@ document.addEventListener("turbo:load", function () {
       e.preventDefault();
       console.log("prevented");
       error.textContent = "キーワードを入力してください";
+      errorBox.classList.remove("d-none");
     } else {
       error.textContent = "";
+      errorBox.classList.add("d-none");
     }
   });
 });

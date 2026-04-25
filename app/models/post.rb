@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   belongs_to :community, optional: true
 
   validates :date, presence: true
-  validates :distance, presence: true
+  validates :distance, presence: true, numericality: { greater_than: 0 }
   validates :time, presence: true
   # コミュニティIDは必須
   validates :community_id, presence: true

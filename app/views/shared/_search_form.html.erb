@@ -15,5 +15,11 @@
     <%= link_to "クリア", search_path %>
   <% end %>
 
-  <p id="search-error" class="text-danger mt-2"></p>
+  <%# 検索時エラーメッセージ表示用の要素 %>
+  <div id="search-error-box" class="search-error-box d-none">
+    <p class="search-error-title">入力内容に誤りがあります。ご確認ください。</p>
+    <ul class="mb-0">
+      <li id="search-error"></li>
+    </ul>
+  </div>
 <% end %>

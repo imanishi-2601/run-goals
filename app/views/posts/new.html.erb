@@ -1,54 +1,75 @@
 <h1>新規投稿</h1>
-<% if @post.errors.any? %>
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+
+<div class="page-content">
+  <div class="post-container">
+    <% if @post.errors.any? %>
+    <%# エラーメッセージ表示 %>
+      <div class="search-error-box">
+        <p class="search-error-title">入力内容に誤りがあります。ご確認ください。</p>
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </ul>
-<% end %>
 
-<%= form_with model: @post do |f| %>
-  <!-- 項目 -->
-  <!-- データ -->
+    <%= form_with model: @post do |f| %>
+      <!-- 項目 -->
+      <!-- データ -->
 
-  <div class="form-row">
-    <div class="post-column">
-      <div class="post-label">日付</div>
-      <div class="post-input">
-        <%= f.date_field :date %>
+      <div class="form-row">
+        <div class="post-column">
+          <div class="post-label">日付 <span class="text-danger">*</span>
+          </div>
+          <div class="post-input">
+            <%= f.date_field :date %>
+          </div>
+        </div>
+
+        <div class="post-column">
+          <div class="post-label">距離[km] <span class="text-danger">*</span>
+          </div>
+          <div class="post-input">
+            <%= f.text_field :distance %>
+          </div>
+        </div>
+
+        <div class="post-column">
+          <div class="post-label">時間 <span class="text-danger">*</span>
+          </div>
+          <div class="post-input">
+            <%= number_field_tag :hour, nil, placeholder: "時", min: 0, class: "time-input" %>
+            :
+            <%= number_field_tag :min, nil, placeholder: "分", min: 0, max: 59, class: "time-input" %>
+            :
+            <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59, class: "time-input" %>
+          </div>
+        </div>
+
+        <div class="post-column">
+          <div class="post-label">対象コミュニティ <span class="text-danger">*</span>
+          </div>
+          <div class="post-input">
+            <%= f.collection_select :community_id,
+              current_user.joined_communities,
+              :id,
+              :name,
+              { prompt: "コミュニティを選択" }, { class: "post-select"} %>
+          </div>
+        </div>
+
+        <div class="post-column memo-column">
+          <div class="post-label">メモ/感想
+          </div>
+          <div class="post-input">
+            <%= f.text_area :memo, rows: 2, class: "memo-textarea" %>
+          </div>
+        </div>
+
       </div>
-    </div>
-    <div class="post-column">
-      <div class="post-label">距離[km]</div>
-      <div class="post-input">
-        <%= f.text_field :distance %>
-      </div>
-    </div>
-    <div class="post-column">
-      <div class="post-label">時間</div>
-      <div class="post-input">
-        <%= number_field_tag :hour, nil, placeholder: "時", min: 0, class: "time-input" %>
-        :
-        <%= number_field_tag :min, nil, placeholder: "分", min: 0, max: 59, class: "time-input" %>
-        :
-        <%= number_field_tag :sec, nil, placeholder: "秒", min: 0, max: 59, class: "time-input" %>
-      </div>
-    </div>
-    <div class="post-column">
-      <div class="post-label">対象コミュニティ <span class="text-danger">*</span></div>
-      <%= f.collection_select :community_id,
-          current_user.joined_communities,
-          :id,
-          :name,
-          { prompt: "コミュニティを選択" }, { class: "post-input"} %>
-    </div>
-    <div class="post-column memo-column">
-      <div class="post-label">メモ/感想</div>
-      <div class="post-input">
-        <%= f.text_area :memo, rows: 2, class: "memo-textarea" %>
-      </div>
-    </div>
+
+      <%= f.submit '投稿' %>
+    <% end %>
   </div>
-
-  <%= f.submit '投稿' %>
-<% end %>
+</div>

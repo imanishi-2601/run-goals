@@ -27,6 +27,12 @@ ja:
         name: コミュニティ名
         introduction: コミュニティ紹介
 
+      post:
+        date: 日付
+        distance: 距離
+        community_id: 対象コミュニティ
+        memo: メモ・感想
+
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -34,6 +40,8 @@ ja:
       confirmation: "が一致しません。"
       taken: "はすでに使用されています。"
       too_short: "は%{count}文字以上で入力してください。"
+      not_a_number: "は数値で入力してください。"
+      greater_than: "%{count}より大きい値を入力してください。"
       not_saved:
         one: "1件のエラーにより、この%{resource}を保存できませんでした。"
         other: "%{count}件のエラーにより、この%{resource}を保存できませんでした。"

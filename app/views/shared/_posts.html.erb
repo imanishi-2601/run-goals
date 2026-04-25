@@ -1,11 +1,11 @@
 <% admin = local_assigns[:admin] %>
-        <div>
-        <div class="post-container">
-          <table class="post-table">
-            <thead>
+    <div>
+      <div class="post-container">
+        <table class="post-table">
+          <thead>
             <tr>
               <th>日付</th>
-              <th>名前</th>
+              <th>ユーザー名</th>
               <th>距離[km]</th>
               <th>時間[時:分:秒]</th>
               <th>ペース[分:秒/km]</th>
@@ -14,10 +14,10 @@
                 <th></th>
               <% end %>
             </tr>
-            </thead>
+          </thead>
 
-            <tbody>
-              <% if posts.any? %>
+          <tbody>
+            <% if posts.any? %>
               <% posts.each do |post| %>
               <tr>
                 <td><%= post.date %></td>
@@ -33,13 +33,13 @@
               </tr>
               <% end %>
 
-              <% else %>
-                <tr>
-                  <td colspan="<%= admin ? 5 : 6 %>">投稿がまだありません</td>
-                </tr>
-              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="<%= admin ? 5 : 6 %>">投稿がまだありません</td>
+              </tr>
+            <% end %>
 
-            </tbody>
-          </table>
-        </div>
-        </div>
+          </tbody>
+        </table>
+      </div>
+    </div>
