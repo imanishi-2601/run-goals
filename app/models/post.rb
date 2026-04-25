@@ -5,6 +5,12 @@ class Post < ApplicationRecord
   validates :date, presence: true
   validates :distance, presence: true, numericality: { greater_than: 0 }
   validates :time, presence: true
+  validates :time,
+  numericality: {
+    greater_than: 0,
+    message: "は1秒以上で入力してください。",
+    allow_nil: true
+  }
   # コミュニティIDは必須
   validates :community_id, presence: true
 

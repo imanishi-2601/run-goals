@@ -44,42 +44,30 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def create
-    total_sec = Post.to_sec(
-      params[:hour].to_i,
-      params[:min].to_i,
-      params[:sec].to_i
-    )
+def create
+  @post = current_user.posts.new(post_params)
+  @post.time = build_total_seconds
 
-    @post = current_user.posts.new(post_params)
-    @post.time = total_sec
-
-
-    if @post.save
-      redirect_to post_path(@post), notice: "投稿を作成しました"
-    else
-      render :new, status: :unprocessable_entity
-    end
+  if @post.save
+    redirect_to post_path(@post), notice: "投稿を作成しました"
+  else
+    render :new, status: :unprocessable_entity
   end
+end
 
   def edit
   end
 
-  def update
-    total_sec = Post.to_sec(
-      params[:hour].to_i,
-      params[:min].to_i,
-      params[:sec].to_i
-    )
+def update
+  @post.assign_attributes(post_params)
+  @post.time = build_total_seconds
 
-    @post.time = total_sec
-
-    if @post.update(post_params)
-      redirect_to post_path(@post), notice: "投稿を更新しました"
-    else
-      render :edit, status: :unprocessable_entity
-    end
+  if @post.save
+    redirect_to post_path(@post), notice: "投稿を更新しました"
+  else
+    render :edit, status: :unprocessable_entity
   end
+end
 
   def destroy
     @post.destroy
@@ -98,6 +86,18 @@ class PostsController < ApplicationController
       :is_public,
       :community_id
     )
+  end
+
+  def build_total_seconds
+    hour = params[:hour]
+    min  = params[:min]
+    sec  = params[:sec]
+
+    # 3つ全部空欄なら未入力扱い
+    return nil if hour.blank? && min.blank? && sec.blank?
+
+    # 0もそのまま返す
+    Post.to_sec(hour.to_i, min.to_i, sec.to_i)
   end
 
   # 投稿を@postにセットするメソッド(各アクション前の動作)
