@@ -6,6 +6,7 @@ class Admins::UsersController < Admins::BaseController
   def show
     @users = User.all
     @user = User.find(params[:id])
+    @community = Community.find_by(id: params[:community_id])
   end
 
   # 利用停止/再開のアクション

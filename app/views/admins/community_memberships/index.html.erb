@@ -14,7 +14,7 @@
       <tbody>
         <% @memberships.each do |membership| %>
           <tr>
-            <td><%= membership.user.name %></td>
+            <td><%= link_to membership.user.name, admins_user_path(membership.user, community_id: @community.id) %></td>
             <td><%= membership.approved? ? "参加中" : membership.status %></td>
           </tr>
         <% end %>

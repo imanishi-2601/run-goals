@@ -67,7 +67,12 @@
           </tr>
         </tbody>
       </table>
-      <%= link_to "一覧へ戻る", admins_users_path %>
+      <%= link_to "ユーザー管理一覧へ戻る", admins_users_path %>
+      <br>
+      <% if @community.present? %>
+        <%= link_to "コミュニティメンバー管理へ戻る",
+        admins_community_community_memberships_path(@community) %>
+      <% end %>
     </div>
   </div>
 </div>
